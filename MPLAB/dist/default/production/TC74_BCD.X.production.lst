@@ -1,0 +1,1989 @@
+
+
+Microchip MPLAB XC8 Assembler V2.05 build -831301201 
+                                                                                               Mon May 18 01:33:31 2020
+
+Microchip MPLAB XC8 C Compiler v2.05 (Free license) build 20181220022703 Og1 
+     1                           	processor	18F14K50
+     2                           	fnconf	rparam,??,?,0
+     3                           	opt	pw 120
+     4                           	opt	flic
+     5                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     6                           	psect	bssCOMRAM,global,class=COMRAM,space=1,delta=1,noexec
+     7                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,noexec
+     8                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    12                           	psect	text4,global,reloc=2,class=CODE,delta=1
+    13                           	psect	text5,global,reloc=2,class=CODE,delta=1
+    14                           	psect	text6,global,reloc=2,class=CODE,delta=1
+    15                           	psect	text7,global,reloc=2,class=CODE,delta=1
+    16                           	psect	text8,global,reloc=2,class=CODE,delta=1
+    17                           	psect	text9,global,reloc=2,class=CODE,delta=1,group=1
+    18                           	psect	text10,global,reloc=2,class=CODE,delta=1,group=1
+    19                           	psect	text11,global,reloc=2,class=CODE,delta=1,group=1
+    20                           	psect	text12,global,reloc=2,class=CODE,delta=1
+    21                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    22                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    23  0000                     
+    24                           ; Version 2.05
+    25                           ; Generated 20/12/2018 GMT
+    26                           ; 
+    27                           ; Copyright © 2018, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    28                           ; All rights reserved.
+    29                           ; 
+    30                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    31                           ; 
+    32                           ; Redistribution and use in source and binary forms, with or without modification, are
+    33                           ; permitted provided that the following conditions are met:
+    34                           ; 
+    35                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    36                           ;        conditions and the following disclaimer.
+    37                           ; 
+    38                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    39                           ;        of conditions and the following disclaimer in the documentation and/or other
+    40                           ;        materials provided with the distribution.
+    41                           ; 
+    42                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    43                           ;        software without specific prior written permission.
+    44                           ; 
+    45                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    46                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    47                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    48                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    49                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    50                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    51                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    52                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    53                           ; 
+    54                           ; 
+    55                           ; Code-generator required, PIC18F14K50 Definitions
+    56                           ; 
+    57                           ; SFR Addresses
+    58  0000                     _SSPBUF	set	4041
+    59  0000                     _LATCbits	set	3979
+    60  0000                     _SSPSTAT	set	4039
+    61  0000                     _SSPADD	set	4040
+    62  0000                     _SSPCON2	set	4037
+    63  0000                     _SSPCON1	set	4038
+    64  0000                     _TRISCbits	set	3988
+    65  0000                     _OSCCON	set	4051
+    66  0000                     _ACKEN	set	32300
+    67  0000                     _ACKDT	set	32301
+    68  0000                     _RCEN	set	32299
+    69  0000                     _PEN	set	32298
+    70  0000                     _SEN	set	32296
+    71                           
+    72                           ; #config settings
+    73  0000                     
+    74                           	psect	cinit
+    75  003A24                     __pcinit:
+    76                           	opt callstack 0
+    77  003A24                     start_initialization:
+    78                           	opt callstack 0
+    79  003A24                     __initialization:
+    80                           	opt callstack 0
+    81                           
+    82                           ; Clear objects allocated to COMRAM (2 bytes)
+    83  003A24  6A1A               	clrf	(__pbssCOMRAM+1)& (0+255),c
+    84  003A26  6A19               	clrf	__pbssCOMRAM& (0+255),c
+    85  003A28                     end_of_initialization:
+    86                           	opt callstack 0
+    87  003A28                     __end_of__initialization:
+    88                           	opt callstack 0
+    89  003A28  0E00               	movlw	low (__Lmediumconst shr (0+16))
+    90  003A2A  6EF8               	movwf	tblptru,c
+    91  003A2C  0100               	movlb	0
+    92  003A2E  EF34  F01E         	goto	_main	;jump to C main() function
+    93                           
+    94                           	psect	bssCOMRAM
+    95  000019                     __pbssCOMRAM:
+    96                           	opt callstack 0
+    97  000019                     _temp:
+    98                           	opt callstack 0
+    99  000019                     	ds	2
+   100                           
+   101                           	psect	cstackCOMRAM
+   102  000001                     __pcstackCOMRAM:
+   103                           	opt callstack 0
+   104  000001                     ??_Initialize:
+   105  000001                     ??_I2C_wait:
+   106  000001                     ?___wmul:
+   107                           	opt callstack 0
+   108  000001                     ?___awmod:
+   109                           	opt callstack 0
+   110  000001                     encode_Temp@x:
+   111                           	opt callstack 0
+   112  000001                     shift_Temp@number:
+   113                           	opt callstack 0
+   114  000001                     ___wmul@multiplier:
+   115                           	opt callstack 0
+   116  000001                     ___awmod@dividend:
+   117                           	opt callstack 0
+   118                           
+   119                           ; 2 bytes @ 0x0
+   120  000001                     	ds	1
+   121  000002                     ?_read_byte:
+   122                           	opt callstack 0
+   123  000002                     write_byte@x:
+   124                           	opt callstack 0
+   125                           
+   126                           ; 2 bytes @ 0x1
+   127  000002                     	ds	1
+   128  000003                     ??_encode_Temp:
+   129  000003                     shift_Temp@SIPO:
+   130                           	opt callstack 0
+   131  000003                     ___wmul@multiplicand:
+   132                           	opt callstack 0
+   133  000003                     ___awmod@divisor:
+   134                           	opt callstack 0
+   135                           
+   136                           ; 2 bytes @ 0x2
+   137  000003                     	ds	1
+   138  000004                     read_byte@x:
+   139                           	opt callstack 0
+   140                           
+   141                           ; 2 bytes @ 0x3
+   142  000004                     	ds	1
+   143  000005                     ??_shift_Temp:
+   144  000005                     encode_Temp@sequence:
+   145                           	opt callstack 0
+   146  000005                     ___awmod@counter:
+   147                           	opt callstack 0
+   148  000005                     ___wmul@product:
+   149                           	opt callstack 0
+   150                           
+   151                           ; 2 bytes @ 0x4
+   152  000005                     	ds	1
+   153  000006                     ___awmod@sign:
+   154                           	opt callstack 0
+   155                           
+   156                           ; 1 bytes @ 0x5
+   157  000006                     	ds	1
+   158  000007                     ?___awdiv:
+   159                           	opt callstack 0
+   160  000007                     ___awdiv@dividend:
+   161                           	opt callstack 0
+   162                           
+   163                           ; 2 bytes @ 0x6
+   164  000007                     	ds	2
+   165  000009                     ___awdiv@divisor:
+   166                           	opt callstack 0
+   167                           
+   168                           ; 2 bytes @ 0x8
+   169  000009                     	ds	2
+   170  00000B                     ___awdiv@counter:
+   171                           	opt callstack 0
+   172                           
+   173                           ; 1 bytes @ 0xA
+   174  00000B                     	ds	1
+   175  00000C                     ___awdiv@sign:
+   176                           	opt callstack 0
+   177                           
+   178                           ; 1 bytes @ 0xB
+   179  00000C                     	ds	1
+   180  00000D                     ___awdiv@quotient:
+   181                           	opt callstack 0
+   182                           
+   183                           ; 2 bytes @ 0xC
+   184  00000D                     	ds	2
+   185  00000F                     ??_main:
+   186                           
+   187                           ; 1 bytes @ 0xE
+   188  00000F                     	ds	2
+   189  000011                     main@tens:
+   190                           	opt callstack 0
+   191                           
+   192                           ; 2 bytes @ 0x10
+   193  000011                     	ds	2
+   194  000013                     main@ones:
+   195                           	opt callstack 0
+   196                           
+   197                           ; 2 bytes @ 0x12
+   198  000013                     	ds	2
+   199  000015                     main@BCD1:
+   200                           	opt callstack 0
+   201                           
+   202                           ; 1 bytes @ 0x14
+   203  000015                     	ds	1
+   204  000016                     main@BCD2:
+   205                           	opt callstack 0
+   206                           
+   207                           ; 1 bytes @ 0x15
+   208  000016                     	ds	1
+   209  000017                     main@temp_f:
+   210                           	opt callstack 0
+   211                           
+   212                           ; 2 bytes @ 0x16
+   213  000017                     	ds	2
+   214                           
+   215 ;;
+   216 ;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
+   217 ;;
+   218 ;; *************** function _main *****************
+   219 ;; Defined at:
+   220 ;;		line 89 in file "TC74_BCD.c"
+   221 ;; Parameters:    Size  Location     Type
+   222 ;;		None
+   223 ;; Auto vars:     Size  Location     Type
+   224 ;;  SIPO            2    0        int 
+   225 ;;  temp_f          2   22[COMRAM] int 
+   226 ;;  ones            2   18[COMRAM] int 
+   227 ;;  tens            2   16[COMRAM] int 
+   228 ;;  BCD2            1   21[COMRAM] unsigned char 
+   229 ;;  BCD1            1   20[COMRAM] unsigned char 
+   230 ;; Return value:  Size  Location     Type
+   231 ;;                  1    wreg      void 
+   232 ;; Registers used:
+   233 ;;		wreg, status,2, status,0, prodl, prodh, cstack
+   234 ;; Tracked objects:
+   235 ;;		On entry : 0/0
+   236 ;;		On exit  : 0/0
+   237 ;;		Unchanged: 0/0
+   238 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+   239 ;;      Params:         0       0       0       0
+   240 ;;      Locals:        10       0       0       0
+   241 ;;      Temps:          2       0       0       0
+   242 ;;      Totals:        12       0       0       0
+   243 ;;Total ram usage:       12 bytes
+   244 ;; Hardware stack levels required when called:    3
+   245 ;; This function calls:
+   246 ;;		_Initialize
+   247 ;;		___awdiv
+   248 ;;		___awmod
+   249 ;;		___wmul
+   250 ;;		_encode_Temp
+   251 ;;		_get_Temp
+   252 ;;		_shift_Temp
+   253 ;; This function is called by:
+   254 ;;		Startup code after reset
+   255 ;; This function uses a non-reentrant model
+   256 ;;
+   257                           
+   258                           	psect	text0
+   259  003C68                     __ptext0:
+   260                           	opt callstack 0
+   261  003C68                     _main:
+   262                           	opt callstack 28
+   263                           
+   264                           ;TC74_BCD.c: 90:     _delay((unsigned long)((300)*(4000000/4000.0)));
+   265                           
+   266                           ;incstack = 0
+   267  003C68  0E02               	movlw	2
+   268  003C6A  6E10               	movwf	(??_main+1)& (0+255),c
+   269  003C6C  0E86               	movlw	134
+   270  003C6E  6E0F               	movwf	??_main& (0+255),c
+   271  003C70  0E99               	movlw	153
+   272  003C72                     u477:
+   273  003C72  2EE8               	decfsz	wreg,f,c
+   274  003C74  D7FE               	bra	u477
+   275  003C76  2E0F               	decfsz	??_main& (0+255),f,c
+   276  003C78  D7FC               	bra	u477
+   277  003C7A  2E10               	decfsz	(??_main+1)& (0+255),f,c
+   278  003C7C  D7FA               	bra	u477
+   279  003C7E  F000               	nop	
+   280                           
+   281                           ;TC74_BCD.c: 91:     Initialize();
+   282  003C80  EC46  F01D         	call	_Initialize	;wreg free
+   283  003C84                     l1272:
+   284                           
+   285                           ;TC74_BCD.c: 93:     get_Temp();
+   286  003C84  EC62  F01D         	call	_get_Temp	;wreg free
+   287                           
+   288                           ;TC74_BCD.c: 94:     int temp_f = (temp * 9/5) + 32;
+   289  003C88  C019  F001         	movff	_temp,___wmul@multiplier
+   290  003C8C  C01A  F002         	movff	_temp+1,___wmul@multiplier+1
+   291  003C90  0E00               	movlw	0
+   292  003C92  6E04               	movwf	___wmul@multiplicand+1,c
+   293  003C94  0E09               	movlw	9
+   294  003C96  6E03               	movwf	___wmul@multiplicand,c
+   295  003C98  EC33  F01D         	call	___wmul	;wreg free
+   296  003C9C  C001  F007         	movff	?___wmul,___awdiv@dividend
+   297  003CA0  C002  F008         	movff	?___wmul+1,___awdiv@dividend+1
+   298  003CA4  0E00               	movlw	0
+   299  003CA6  6E0A               	movwf	___awdiv@divisor+1,c
+   300  003CA8  0E05               	movlw	5
+   301  003CAA  6E09               	movwf	___awdiv@divisor,c
+   302  003CAC  ECF2  F01D         	call	___awdiv	;wreg free
+   303  003CB0  0E20               	movlw	32
+   304  003CB2  2407               	addwf	?___awdiv,w,c
+   305  003CB4  6E17               	movwf	main@temp_f,c
+   306  003CB6  0E00               	movlw	0
+   307  003CB8  2008               	addwfc	?___awdiv+1,w,c
+   308  003CBA  6E18               	movwf	main@temp_f+1,c
+   309                           
+   310                           ;TC74_BCD.c: 95:     int tens = temp_f / 10;
+   311  003CBC  C017  F007         	movff	main@temp_f,___awdiv@dividend
+   312  003CC0  C018  F008         	movff	main@temp_f+1,___awdiv@dividend+1
+   313  003CC4  0E00               	movlw	0
+   314  003CC6  6E0A               	movwf	___awdiv@divisor+1,c
+   315  003CC8  0E0A               	movlw	10
+   316  003CCA  6E09               	movwf	___awdiv@divisor,c
+   317  003CCC  ECF2  F01D         	call	___awdiv	;wreg free
+   318  003CD0  C007  F011         	movff	?___awdiv,main@tens
+   319  003CD4  C008  F012         	movff	?___awdiv+1,main@tens+1
+   320                           
+   321                           ;TC74_BCD.c: 96:     int ones = temp_f % 10;
+   322  003CD8  C017  F001         	movff	main@temp_f,___awmod@dividend
+   323  003CDC  C018  F002         	movff	main@temp_f+1,___awmod@dividend+1
+   324  003CE0  0E00               	movlw	0
+   325  003CE2  6E04               	movwf	___awmod@divisor+1,c
+   326  003CE4  0E0A               	movlw	10
+   327  003CE6  6E03               	movwf	___awmod@divisor,c
+   328  003CE8  EC81  F01D         	call	___awmod	;wreg free
+   329  003CEC  C001  F013         	movff	?___awmod,main@ones
+   330  003CF0  C002  F014         	movff	?___awmod+1,main@ones+1
+   331                           
+   332                           ;TC74_BCD.c: 97:     unsigned char BCD1 = encode_Temp(tens);
+   333  003CF4  C011  F001         	movff	main@tens,encode_Temp@x
+   334  003CF8  C012  F002         	movff	main@tens+1,encode_Temp@x+1
+   335  003CFC  ECB9  F01D         	call	_encode_Temp	;wreg free
+   336  003D00  6E15               	movwf	main@BCD1,c
+   337                           
+   338                           ;TC74_BCD.c: 99:     shift_Temp(BCD1, SIPO);
+   339  003D02  C015  F001         	movff	main@BCD1,shift_Temp@number
+   340  003D06  6A02               	clrf	shift_Temp@number+1,c
+   341  003D08  0E00               	movlw	0
+   342  003D0A  6E04               	movwf	shift_Temp@SIPO+1,c
+   343  003D0C  0E01               	movlw	1
+   344  003D0E  6E03               	movwf	shift_Temp@SIPO,c
+   345  003D10  ECA6  F01E         	call	_shift_Temp	;wreg free
+   346                           
+   347                           ;TC74_BCD.c: 100:     unsigned char BCD2 = encode_Temp(ones);
+   348  003D14  C013  F001         	movff	main@ones,encode_Temp@x
+   349  003D18  C014  F002         	movff	main@ones+1,encode_Temp@x+1
+   350  003D1C  ECB9  F01D         	call	_encode_Temp	;wreg free
+   351  003D20  6E16               	movwf	main@BCD2,c
+   352                           
+   353                           ;TC74_BCD.c: 102:     shift_Temp(BCD2, SIPO);
+   354  003D22  C016  F001         	movff	main@BCD2,shift_Temp@number
+   355  003D26  6A02               	clrf	shift_Temp@number+1,c
+   356  003D28  0E00               	movlw	0
+   357  003D2A  6E04               	movwf	shift_Temp@SIPO+1,c
+   358  003D2C  0E02               	movlw	2
+   359  003D2E  6E03               	movwf	shift_Temp@SIPO,c
+   360  003D30  ECA6  F01E         	call	_shift_Temp	;wreg free
+   361                           
+   362                           ;TC74_BCD.c: 103:     _delay((unsigned long)((1000)*(4000000/4000.0)));
+   363  003D34  0E06               	movlw	6
+   364  003D36  6E10               	movwf	(??_main+1)& (0+255),c
+   365  003D38  0E13               	movlw	19
+   366  003D3A  6E0F               	movwf	??_main& (0+255),c
+   367  003D3C  0EAE               	movlw	174
+   368  003D3E                     u487:
+   369  003D3E  2EE8               	decfsz	wreg,f,c
+   370  003D40  D7FE               	bra	u487
+   371  003D42  2E0F               	decfsz	??_main& (0+255),f,c
+   372  003D44  D7FC               	bra	u487
+   373  003D46  2E10               	decfsz	(??_main+1)& (0+255),f,c
+   374  003D48  D7FA               	bra	u487
+   375  003D4A  D79C               	goto	l1272
+   376  003D4C                     __end_of_main:
+   377                           	opt callstack 0
+   378                           
+   379 ;; *************** function _shift_Temp *****************
+   380 ;; Defined at:
+   381 ;;		line 207 in file "TC74_BCD.c"
+   382 ;; Parameters:    Size  Location     Type
+   383 ;;  number          2    0[COMRAM] unsigned int 
+   384 ;;  SIPO            2    2[COMRAM] int 
+   385 ;; Auto vars:     Size  Location     Type
+   386 ;;		None
+   387 ;; Return value:  Size  Location     Type
+   388 ;;                  1    wreg      void 
+   389 ;; Registers used:
+   390 ;;		wreg, status,2, status,0
+   391 ;; Tracked objects:
+   392 ;;		On entry : 0/0
+   393 ;;		On exit  : 0/0
+   394 ;;		Unchanged: 0/0
+   395 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+   396 ;;      Params:         4       0       0       0
+   397 ;;      Locals:         0       0       0       0
+   398 ;;      Temps:          3       0       0       0
+   399 ;;      Totals:         7       0       0       0
+   400 ;;Total ram usage:        7 bytes
+   401 ;; Hardware stack levels used:    1
+   402 ;; This function calls:
+   403 ;;		Nothing
+   404 ;; This function is called by:
+   405 ;;		_main
+   406 ;; This function uses a non-reentrant model
+   407 ;;
+   408                           
+   409                           	psect	text1
+   410  003D4C                     __ptext1:
+   411                           	opt callstack 0
+   412  003D4C                     _shift_Temp:
+   413                           	opt callstack 30
+   414                           
+   415                           ;TC74_BCD.c: 208:   if (SIPO == 1) {
+   416                           
+   417                           ;incstack = 0
+   418  003D4C  0403               	decf	shift_Temp@SIPO,w,c
+   419  003D4E  1004               	iorwf	shift_Temp@SIPO+1,w,c
+   420  003D50  A4D8               	btfss	status,2,c
+   421  003D52  D0AC               	goto	l1142
+   422                           
+   423                           ;TC74_BCD.c: 209:     LATCbits.LC3 = 0;
+   424  003D54  968B               	bcf	3979,3,c	;volatile
+   425                           
+   426                           ;TC74_BCD.c: 210:     LATCbits.LC0 = 0;
+   427  003D56  908B               	bcf	3979,0,c	;volatile
+   428                           
+   429                           ;TC74_BCD.c: 211:     LATCbits.LC5 = ((number >> 7) & 0x01);
+   430  003D58  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   431  003D5C  C002  F006         	movff	shift_Temp@number+1,??_shift_Temp+1
+   432  003D60  0E07               	movlw	7
+   433  003D62  6E07               	movwf	(??_shift_Temp+2)& (0+255),c
+   434  003D64                     u265:
+   435  003D64  90D8               	bcf	status,0,c
+   436  003D66  3206               	rrcf	??_shift_Temp+1,f,c
+   437  003D68  3205               	rrcf	??_shift_Temp,f,c
+   438  003D6A  2E07               	decfsz	(??_shift_Temp+2)& (0+255),f,c
+   439  003D6C  D7FB               	goto	u265
+   440  003D6E  0E01               	movlw	1
+   441  003D70  1605               	andwf	??_shift_Temp,f,c
+   442  003D72  3A05               	swapf	??_shift_Temp,f,c
+   443  003D74  4605               	rlncf	??_shift_Temp,f,c
+   444  003D76  508B               	movf	3979,w,c	;volatile
+   445  003D78  1805               	xorwf	??_shift_Temp,w,c
+   446  003D7A  0BDF               	andlw	-33
+   447  003D7C  1805               	xorwf	??_shift_Temp,w,c
+   448  003D7E  6E8B               	movwf	3979,c	;volatile
+   449                           
+   450                           ;TC74_BCD.c: 212:     LATCbits.LC0 = 1;
+   451  003D80  808B               	bsf	3979,0,c	;volatile
+   452                           
+   453                           ;TC74_BCD.c: 213:     LATCbits.LC0 = 0;
+   454  003D82  908B               	bcf	3979,0,c	;volatile
+   455                           
+   456                           ;TC74_BCD.c: 214:     LATCbits.LC5 = ((number >> 6) & 0x01);
+   457  003D84  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   458  003D88  C002  F006         	movff	shift_Temp@number+1,??_shift_Temp+1
+   459  003D8C  0E06               	movlw	6
+   460  003D8E  6E07               	movwf	(??_shift_Temp+2)& (0+255),c
+   461  003D90                     u275:
+   462  003D90  90D8               	bcf	status,0,c
+   463  003D92  3206               	rrcf	??_shift_Temp+1,f,c
+   464  003D94  3205               	rrcf	??_shift_Temp,f,c
+   465  003D96  2E07               	decfsz	(??_shift_Temp+2)& (0+255),f,c
+   466  003D98  D7FB               	goto	u275
+   467  003D9A  0E01               	movlw	1
+   468  003D9C  1605               	andwf	??_shift_Temp,f,c
+   469  003D9E  3A05               	swapf	??_shift_Temp,f,c
+   470  003DA0  4605               	rlncf	??_shift_Temp,f,c
+   471  003DA2  508B               	movf	3979,w,c	;volatile
+   472  003DA4  1805               	xorwf	??_shift_Temp,w,c
+   473  003DA6  0BDF               	andlw	-33
+   474  003DA8  1805               	xorwf	??_shift_Temp,w,c
+   475  003DAA  6E8B               	movwf	3979,c	;volatile
+   476                           
+   477                           ;TC74_BCD.c: 215:     LATCbits.LC0 = 1;
+   478  003DAC  808B               	bsf	3979,0,c	;volatile
+   479                           
+   480                           ;TC74_BCD.c: 216:     LATCbits.LC0 = 0;
+   481  003DAE  908B               	bcf	3979,0,c	;volatile
+   482                           
+   483                           ;TC74_BCD.c: 217:     LATCbits.LC5 = ((number >> 5) & 0x01);
+   484  003DB0  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   485  003DB4  C002  F006         	movff	shift_Temp@number+1,??_shift_Temp+1
+   486  003DB8  0E05               	movlw	5
+   487  003DBA  6E07               	movwf	(??_shift_Temp+2)& (0+255),c
+   488  003DBC                     u285:
+   489  003DBC  90D8               	bcf	status,0,c
+   490  003DBE  3206               	rrcf	??_shift_Temp+1,f,c
+   491  003DC0  3205               	rrcf	??_shift_Temp,f,c
+   492  003DC2  2E07               	decfsz	(??_shift_Temp+2)& (0+255),f,c
+   493  003DC4  D7FB               	goto	u285
+   494  003DC6  0E01               	movlw	1
+   495  003DC8  1605               	andwf	??_shift_Temp,f,c
+   496  003DCA  3A05               	swapf	??_shift_Temp,f,c
+   497  003DCC  4605               	rlncf	??_shift_Temp,f,c
+   498  003DCE  508B               	movf	3979,w,c	;volatile
+   499  003DD0  1805               	xorwf	??_shift_Temp,w,c
+   500  003DD2  0BDF               	andlw	-33
+   501  003DD4  1805               	xorwf	??_shift_Temp,w,c
+   502  003DD6  6E8B               	movwf	3979,c	;volatile
+   503                           
+   504                           ;TC74_BCD.c: 218:     LATCbits.LC0 = 1;
+   505  003DD8  808B               	bsf	3979,0,c	;volatile
+   506                           
+   507                           ;TC74_BCD.c: 219:     LATCbits.LC0 = 0;
+   508  003DDA  908B               	bcf	3979,0,c	;volatile
+   509                           
+   510                           ;TC74_BCD.c: 220:     LATCbits.LC5 = ((number >> 4) & 0x01);
+   511  003DDC  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   512  003DE0  C002  F006         	movff	shift_Temp@number+1,??_shift_Temp+1
+   513  003DE4  0E04               	movlw	4
+   514  003DE6  6E07               	movwf	(??_shift_Temp+2)& (0+255),c
+   515  003DE8                     u295:
+   516  003DE8  90D8               	bcf	status,0,c
+   517  003DEA  3206               	rrcf	??_shift_Temp+1,f,c
+   518  003DEC  3205               	rrcf	??_shift_Temp,f,c
+   519  003DEE  2E07               	decfsz	(??_shift_Temp+2)& (0+255),f,c
+   520  003DF0  D7FB               	goto	u295
+   521  003DF2  0E01               	movlw	1
+   522  003DF4  1605               	andwf	??_shift_Temp,f,c
+   523  003DF6  3A05               	swapf	??_shift_Temp,f,c
+   524  003DF8  4605               	rlncf	??_shift_Temp,f,c
+   525  003DFA  508B               	movf	3979,w,c	;volatile
+   526  003DFC  1805               	xorwf	??_shift_Temp,w,c
+   527  003DFE  0BDF               	andlw	-33
+   528  003E00  1805               	xorwf	??_shift_Temp,w,c
+   529  003E02  6E8B               	movwf	3979,c	;volatile
+   530                           
+   531                           ;TC74_BCD.c: 221:     LATCbits.LC0 = 1;
+   532  003E04  808B               	bsf	3979,0,c	;volatile
+   533                           
+   534                           ;TC74_BCD.c: 222:     LATCbits.LC0 = 0;
+   535  003E06  908B               	bcf	3979,0,c	;volatile
+   536                           
+   537                           ;TC74_BCD.c: 223:     LATCbits.LC5 = ((number >> 3) & 0x01);
+   538  003E08  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   539  003E0C  C002  F006         	movff	shift_Temp@number+1,??_shift_Temp+1
+   540  003E10  90D8               	bcf	status,0,c
+   541  003E12  3206               	rrcf	??_shift_Temp+1,f,c
+   542  003E14  3205               	rrcf	??_shift_Temp,f,c
+   543  003E16  90D8               	bcf	status,0,c
+   544  003E18  3206               	rrcf	??_shift_Temp+1,f,c
+   545  003E1A  3205               	rrcf	??_shift_Temp,f,c
+   546  003E1C  90D8               	bcf	status,0,c
+   547  003E1E  3206               	rrcf	??_shift_Temp+1,f,c
+   548  003E20  3205               	rrcf	??_shift_Temp,f,c
+   549  003E22  0E01               	movlw	1
+   550  003E24  1605               	andwf	??_shift_Temp,f,c
+   551  003E26  3A05               	swapf	??_shift_Temp,f,c
+   552  003E28  4605               	rlncf	??_shift_Temp,f,c
+   553  003E2A  508B               	movf	3979,w,c	;volatile
+   554  003E2C  1805               	xorwf	??_shift_Temp,w,c
+   555  003E2E  0BDF               	andlw	-33
+   556  003E30  1805               	xorwf	??_shift_Temp,w,c
+   557  003E32  6E8B               	movwf	3979,c	;volatile
+   558                           
+   559                           ;TC74_BCD.c: 224:     LATCbits.LC0 = 1;
+   560  003E34  808B               	bsf	3979,0,c	;volatile
+   561                           
+   562                           ;TC74_BCD.c: 225:     LATCbits.LC0 = 0;
+   563  003E36  908B               	bcf	3979,0,c	;volatile
+   564                           
+   565                           ;TC74_BCD.c: 226:     LATCbits.LC5 = ((number >> 2) & 0x01);
+   566  003E38  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   567  003E3C  C002  F006         	movff	shift_Temp@number+1,??_shift_Temp+1
+   568  003E40  90D8               	bcf	status,0,c
+   569  003E42  3206               	rrcf	??_shift_Temp+1,f,c
+   570  003E44  3205               	rrcf	??_shift_Temp,f,c
+   571  003E46  90D8               	bcf	status,0,c
+   572  003E48  3206               	rrcf	??_shift_Temp+1,f,c
+   573  003E4A  3205               	rrcf	??_shift_Temp,f,c
+   574  003E4C  0E01               	movlw	1
+   575  003E4E  1605               	andwf	??_shift_Temp,f,c
+   576  003E50  3A05               	swapf	??_shift_Temp,f,c
+   577  003E52  4605               	rlncf	??_shift_Temp,f,c
+   578  003E54  508B               	movf	3979,w,c	;volatile
+   579  003E56  1805               	xorwf	??_shift_Temp,w,c
+   580  003E58  0BDF               	andlw	-33
+   581  003E5A  1805               	xorwf	??_shift_Temp,w,c
+   582  003E5C  6E8B               	movwf	3979,c	;volatile
+   583                           
+   584                           ;TC74_BCD.c: 227:     LATCbits.LC0 = 1;
+   585  003E5E  808B               	bsf	3979,0,c	;volatile
+   586                           
+   587                           ;TC74_BCD.c: 228:     LATCbits.LC0 = 0;
+   588  003E60  908B               	bcf	3979,0,c	;volatile
+   589                           
+   590                           ;TC74_BCD.c: 229:     LATCbits.LC5 = ((number >> 1) & 0x01);
+   591  003E62  90D8               	bcf	status,0,c
+   592  003E64  3002               	rrcf	shift_Temp@number+1,w,c
+   593  003E66  6E06               	movwf	(??_shift_Temp+1)& (0+255),c
+   594  003E68  3001               	rrcf	shift_Temp@number,w,c
+   595  003E6A  6E05               	movwf	??_shift_Temp& (0+255),c
+   596  003E6C  0E01               	movlw	1
+   597  003E6E  1605               	andwf	??_shift_Temp,f,c
+   598  003E70  3A05               	swapf	??_shift_Temp,f,c
+   599  003E72  4605               	rlncf	??_shift_Temp,f,c
+   600  003E74  508B               	movf	3979,w,c	;volatile
+   601  003E76  1805               	xorwf	??_shift_Temp,w,c
+   602  003E78  0BDF               	andlw	-33
+   603  003E7A  1805               	xorwf	??_shift_Temp,w,c
+   604  003E7C  6E8B               	movwf	3979,c	;volatile
+   605                           
+   606                           ;TC74_BCD.c: 230:     LATCbits.LC0 = 1;
+   607  003E7E  808B               	bsf	3979,0,c	;volatile
+   608                           
+   609                           ;TC74_BCD.c: 231:     LATCbits.LC0 = 0;
+   610  003E80  908B               	bcf	3979,0,c	;volatile
+   611                           
+   612                           ;TC74_BCD.c: 232:     LATCbits.LC5 = (number & 0x01);
+   613  003E82  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   614  003E86  0E01               	movlw	1
+   615  003E88  1605               	andwf	??_shift_Temp,f,c
+   616  003E8A  3A05               	swapf	??_shift_Temp,f,c
+   617  003E8C  4605               	rlncf	??_shift_Temp,f,c
+   618  003E8E  508B               	movf	3979,w,c	;volatile
+   619  003E90  1805               	xorwf	??_shift_Temp,w,c
+   620  003E92  0BDF               	andlw	-33
+   621  003E94  1805               	xorwf	??_shift_Temp,w,c
+   622  003E96  6E8B               	movwf	3979,c	;volatile
+   623                           
+   624                           ;TC74_BCD.c: 233:     LATCbits.LC0 = 1;
+   625  003E98  808B               	bsf	3979,0,c	;volatile
+   626                           
+   627                           ;TC74_BCD.c: 234:     _delay((unsigned long)((20)*(4000000/4000.0)));
+   628  003E9A  0E1A               	movlw	26
+   629  003E9C  6E05               	movwf	??_shift_Temp& (0+255),c
+   630  003E9E  0EF8               	movlw	248
+   631  003EA0                     u497:
+   632  003EA0  2EE8               	decfsz	wreg,f,c
+   633  003EA2  D7FE               	bra	u497
+   634  003EA4  2E05               	decfsz	??_shift_Temp& (0+255),f,c
+   635  003EA6  D7FC               	bra	u497
+   636  003EA8  D000               	nop2	
+   637                           
+   638                           ;TC74_BCD.c: 235:     LATCbits.LC3 = 1;
+   639  003EAA  868B               	bsf	3979,3,c	;volatile
+   640  003EAC                     l1142:
+   641                           
+   642                           ;TC74_BCD.c: 237:   if (SIPO == 2) {
+   643  003EAC  0E02               	movlw	2
+   644  003EAE  1803               	xorwf	shift_Temp@SIPO,w,c
+   645  003EB0  1004               	iorwf	shift_Temp@SIPO+1,w,c
+   646  003EB2  A4D8               	btfss	status,2,c
+   647  003EB4  0012               	return	
+   648                           
+   649                           ;TC74_BCD.c: 238:     LATCbits.LC6 = 0;
+   650  003EB6  9C8B               	bcf	3979,6,c	;volatile
+   651                           
+   652                           ;TC74_BCD.c: 239:     LATCbits.LC1 = 0;
+   653  003EB8  928B               	bcf	3979,1,c	;volatile
+   654                           
+   655                           ;TC74_BCD.c: 240:     LATCbits.LC4 = ((number >> 7) & 0x01);
+   656  003EBA  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   657  003EBE  C002  F006         	movff	shift_Temp@number+1,??_shift_Temp+1
+   658  003EC2  0E07               	movlw	7
+   659  003EC4  6E07               	movwf	(??_shift_Temp+2)& (0+255),c
+   660  003EC6                     u315:
+   661  003EC6  90D8               	bcf	status,0,c
+   662  003EC8  3206               	rrcf	??_shift_Temp+1,f,c
+   663  003ECA  3205               	rrcf	??_shift_Temp,f,c
+   664  003ECC  2E07               	decfsz	(??_shift_Temp+2)& (0+255),f,c
+   665  003ECE  D7FB               	goto	u315
+   666  003ED0  0E01               	movlw	1
+   667  003ED2  1605               	andwf	??_shift_Temp,f,c
+   668  003ED4  3A05               	swapf	??_shift_Temp,f,c
+   669  003ED6  508B               	movf	3979,w,c	;volatile
+   670  003ED8  1805               	xorwf	??_shift_Temp,w,c
+   671  003EDA  0BEF               	andlw	-17
+   672  003EDC  1805               	xorwf	??_shift_Temp,w,c
+   673  003EDE  6E8B               	movwf	3979,c	;volatile
+   674                           
+   675                           ;TC74_BCD.c: 241:     LATCbits.LC1 = 1;
+   676  003EE0  828B               	bsf	3979,1,c	;volatile
+   677                           
+   678                           ;TC74_BCD.c: 242:     LATCbits.LC1 = 0;
+   679  003EE2  928B               	bcf	3979,1,c	;volatile
+   680                           
+   681                           ;TC74_BCD.c: 243:     LATCbits.LC4 = ((number >> 6) & 0x01);
+   682  003EE4  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   683  003EE8  C002  F006         	movff	shift_Temp@number+1,??_shift_Temp+1
+   684  003EEC  0E06               	movlw	6
+   685  003EEE  6E07               	movwf	(??_shift_Temp+2)& (0+255),c
+   686  003EF0                     u325:
+   687  003EF0  90D8               	bcf	status,0,c
+   688  003EF2  3206               	rrcf	??_shift_Temp+1,f,c
+   689  003EF4  3205               	rrcf	??_shift_Temp,f,c
+   690  003EF6  2E07               	decfsz	(??_shift_Temp+2)& (0+255),f,c
+   691  003EF8  D7FB               	goto	u325
+   692  003EFA  0E01               	movlw	1
+   693  003EFC  1605               	andwf	??_shift_Temp,f,c
+   694  003EFE  3A05               	swapf	??_shift_Temp,f,c
+   695  003F00  508B               	movf	3979,w,c	;volatile
+   696  003F02  1805               	xorwf	??_shift_Temp,w,c
+   697  003F04  0BEF               	andlw	-17
+   698  003F06  1805               	xorwf	??_shift_Temp,w,c
+   699  003F08  6E8B               	movwf	3979,c	;volatile
+   700                           
+   701                           ;TC74_BCD.c: 244:     LATCbits.LC1 = 1;
+   702  003F0A  828B               	bsf	3979,1,c	;volatile
+   703                           
+   704                           ;TC74_BCD.c: 245:     LATCbits.LC1 = 0;
+   705  003F0C  928B               	bcf	3979,1,c	;volatile
+   706                           
+   707                           ;TC74_BCD.c: 246:     LATCbits.LC4 = ((number >> 5) & 0x01);
+   708  003F0E  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   709  003F12  C002  F006         	movff	shift_Temp@number+1,??_shift_Temp+1
+   710  003F16  0E05               	movlw	5
+   711  003F18  6E07               	movwf	(??_shift_Temp+2)& (0+255),c
+   712  003F1A                     u335:
+   713  003F1A  90D8               	bcf	status,0,c
+   714  003F1C  3206               	rrcf	??_shift_Temp+1,f,c
+   715  003F1E  3205               	rrcf	??_shift_Temp,f,c
+   716  003F20  2E07               	decfsz	(??_shift_Temp+2)& (0+255),f,c
+   717  003F22  D7FB               	goto	u335
+   718  003F24  0E01               	movlw	1
+   719  003F26  1605               	andwf	??_shift_Temp,f,c
+   720  003F28  3A05               	swapf	??_shift_Temp,f,c
+   721  003F2A  508B               	movf	3979,w,c	;volatile
+   722  003F2C  1805               	xorwf	??_shift_Temp,w,c
+   723  003F2E  0BEF               	andlw	-17
+   724  003F30  1805               	xorwf	??_shift_Temp,w,c
+   725  003F32  6E8B               	movwf	3979,c	;volatile
+   726                           
+   727                           ;TC74_BCD.c: 247:     LATCbits.LC1 = 1;
+   728  003F34  828B               	bsf	3979,1,c	;volatile
+   729                           
+   730                           ;TC74_BCD.c: 248:     LATCbits.LC1 = 0;
+   731  003F36  928B               	bcf	3979,1,c	;volatile
+   732                           
+   733                           ;TC74_BCD.c: 249:     LATCbits.LC4 = ((number >> 4) & 0x01);
+   734  003F38  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   735  003F3C  C002  F006         	movff	shift_Temp@number+1,??_shift_Temp+1
+   736  003F40  0E04               	movlw	4
+   737  003F42  6E07               	movwf	(??_shift_Temp+2)& (0+255),c
+   738  003F44                     u345:
+   739  003F44  90D8               	bcf	status,0,c
+   740  003F46  3206               	rrcf	??_shift_Temp+1,f,c
+   741  003F48  3205               	rrcf	??_shift_Temp,f,c
+   742  003F4A  2E07               	decfsz	(??_shift_Temp+2)& (0+255),f,c
+   743  003F4C  D7FB               	goto	u345
+   744  003F4E  0E01               	movlw	1
+   745  003F50  1605               	andwf	??_shift_Temp,f,c
+   746  003F52  3A05               	swapf	??_shift_Temp,f,c
+   747  003F54  508B               	movf	3979,w,c	;volatile
+   748  003F56  1805               	xorwf	??_shift_Temp,w,c
+   749  003F58  0BEF               	andlw	-17
+   750  003F5A  1805               	xorwf	??_shift_Temp,w,c
+   751  003F5C  6E8B               	movwf	3979,c	;volatile
+   752                           
+   753                           ;TC74_BCD.c: 250:     LATCbits.LC1 = 1;
+   754  003F5E  828B               	bsf	3979,1,c	;volatile
+   755                           
+   756                           ;TC74_BCD.c: 251:     LATCbits.LC1 = 0;
+   757  003F60  928B               	bcf	3979,1,c	;volatile
+   758                           
+   759                           ;TC74_BCD.c: 252:     LATCbits.LC4 = ((number >> 3) & 0x01);
+   760  003F62  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   761  003F66  C002  F006         	movff	shift_Temp@number+1,??_shift_Temp+1
+   762  003F6A  90D8               	bcf	status,0,c
+   763  003F6C  3206               	rrcf	??_shift_Temp+1,f,c
+   764  003F6E  3205               	rrcf	??_shift_Temp,f,c
+   765  003F70  90D8               	bcf	status,0,c
+   766  003F72  3206               	rrcf	??_shift_Temp+1,f,c
+   767  003F74  3205               	rrcf	??_shift_Temp,f,c
+   768  003F76  90D8               	bcf	status,0,c
+   769  003F78  3206               	rrcf	??_shift_Temp+1,f,c
+   770  003F7A  3205               	rrcf	??_shift_Temp,f,c
+   771  003F7C  0E01               	movlw	1
+   772  003F7E  1605               	andwf	??_shift_Temp,f,c
+   773  003F80  3A05               	swapf	??_shift_Temp,f,c
+   774  003F82  508B               	movf	3979,w,c	;volatile
+   775  003F84  1805               	xorwf	??_shift_Temp,w,c
+   776  003F86  0BEF               	andlw	-17
+   777  003F88  1805               	xorwf	??_shift_Temp,w,c
+   778  003F8A  6E8B               	movwf	3979,c	;volatile
+   779                           
+   780                           ;TC74_BCD.c: 253:     LATCbits.LC1 = 1;
+   781  003F8C  828B               	bsf	3979,1,c	;volatile
+   782                           
+   783                           ;TC74_BCD.c: 254:     LATCbits.LC1 = 0;
+   784  003F8E  928B               	bcf	3979,1,c	;volatile
+   785                           
+   786                           ;TC74_BCD.c: 255:     LATCbits.LC4 = ((number >> 2) & 0x01);
+   787  003F90  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   788  003F94  C002  F006         	movff	shift_Temp@number+1,??_shift_Temp+1
+   789  003F98  90D8               	bcf	status,0,c
+   790  003F9A  3206               	rrcf	??_shift_Temp+1,f,c
+   791  003F9C  3205               	rrcf	??_shift_Temp,f,c
+   792  003F9E  90D8               	bcf	status,0,c
+   793  003FA0  3206               	rrcf	??_shift_Temp+1,f,c
+   794  003FA2  3205               	rrcf	??_shift_Temp,f,c
+   795  003FA4  0E01               	movlw	1
+   796  003FA6  1605               	andwf	??_shift_Temp,f,c
+   797  003FA8  3A05               	swapf	??_shift_Temp,f,c
+   798  003FAA  508B               	movf	3979,w,c	;volatile
+   799  003FAC  1805               	xorwf	??_shift_Temp,w,c
+   800  003FAE  0BEF               	andlw	-17
+   801  003FB0  1805               	xorwf	??_shift_Temp,w,c
+   802  003FB2  6E8B               	movwf	3979,c	;volatile
+   803                           
+   804                           ;TC74_BCD.c: 256:     LATCbits.LC1 = 1;
+   805  003FB4  828B               	bsf	3979,1,c	;volatile
+   806                           
+   807                           ;TC74_BCD.c: 257:     LATCbits.LC1 = 0;
+   808  003FB6  928B               	bcf	3979,1,c	;volatile
+   809                           
+   810                           ;TC74_BCD.c: 258:     LATCbits.LC4 = ((number >> 1) & 0x01);
+   811  003FB8  90D8               	bcf	status,0,c
+   812  003FBA  3002               	rrcf	shift_Temp@number+1,w,c
+   813  003FBC  6E06               	movwf	(??_shift_Temp+1)& (0+255),c
+   814  003FBE  3001               	rrcf	shift_Temp@number,w,c
+   815  003FC0  6E05               	movwf	??_shift_Temp& (0+255),c
+   816  003FC2  0E01               	movlw	1
+   817  003FC4  1605               	andwf	??_shift_Temp,f,c
+   818  003FC6  3A05               	swapf	??_shift_Temp,f,c
+   819  003FC8  508B               	movf	3979,w,c	;volatile
+   820  003FCA  1805               	xorwf	??_shift_Temp,w,c
+   821  003FCC  0BEF               	andlw	-17
+   822  003FCE  1805               	xorwf	??_shift_Temp,w,c
+   823  003FD0  6E8B               	movwf	3979,c	;volatile
+   824                           
+   825                           ;TC74_BCD.c: 259:     LATCbits.LC1 = 1;
+   826  003FD2  828B               	bsf	3979,1,c	;volatile
+   827                           
+   828                           ;TC74_BCD.c: 260:     LATCbits.LC1 = 0;
+   829  003FD4  928B               	bcf	3979,1,c	;volatile
+   830                           
+   831                           ;TC74_BCD.c: 261:     LATCbits.LC4 = (number & 0x01);
+   832  003FD6  C001  F005         	movff	shift_Temp@number,??_shift_Temp
+   833  003FDA  0E01               	movlw	1
+   834  003FDC  1605               	andwf	??_shift_Temp,f,c
+   835  003FDE  3A05               	swapf	??_shift_Temp,f,c
+   836  003FE0  508B               	movf	3979,w,c	;volatile
+   837  003FE2  1805               	xorwf	??_shift_Temp,w,c
+   838  003FE4  0BEF               	andlw	-17
+   839  003FE6  1805               	xorwf	??_shift_Temp,w,c
+   840  003FE8  6E8B               	movwf	3979,c	;volatile
+   841                           
+   842                           ;TC74_BCD.c: 262:     LATCbits.LC1 = 1;
+   843  003FEA  828B               	bsf	3979,1,c	;volatile
+   844                           
+   845                           ;TC74_BCD.c: 263:     _delay((unsigned long)((20)*(4000000/4000.0)));
+   846  003FEC  0E1A               	movlw	26
+   847  003FEE  6E05               	movwf	??_shift_Temp& (0+255),c
+   848  003FF0  0EF8               	movlw	248
+   849  003FF2                     u507:
+   850  003FF2  2EE8               	decfsz	wreg,f,c
+   851  003FF4  D7FE               	bra	u507
+   852  003FF6  2E05               	decfsz	??_shift_Temp& (0+255),f,c
+   853  003FF8  D7FC               	bra	u507
+   854  003FFA  D000               	nop2	
+   855                           
+   856                           ;TC74_BCD.c: 264:     LATCbits.LC6 = 1;
+   857  003FFC  8C8B               	bsf	3979,6,c	;volatile
+   858  003FFE  0012               	return		;funcret
+   859  004000                     __end_of_shift_Temp:
+   860                           	opt callstack 0
+   861                           
+   862 ;; *************** function _get_Temp *****************
+   863 ;; Defined at:
+   864 ;;		line 161 in file "TC74_BCD.c"
+   865 ;; Parameters:    Size  Location     Type
+   866 ;;		None
+   867 ;; Auto vars:     Size  Location     Type
+   868 ;;		None
+   869 ;; Return value:  Size  Location     Type
+   870 ;;                  1    wreg      void 
+   871 ;; Registers used:
+   872 ;;		wreg, status,2, status,0, cstack
+   873 ;; Tracked objects:
+   874 ;;		On entry : 0/0
+   875 ;;		On exit  : 0/0
+   876 ;;		Unchanged: 0/0
+   877 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+   878 ;;      Params:         0       0       0       0
+   879 ;;      Locals:         0       0       0       0
+   880 ;;      Temps:          0       0       0       0
+   881 ;;      Totals:         0       0       0       0
+   882 ;;Total ram usage:        0 bytes
+   883 ;; Hardware stack levels used:    1
+   884 ;; Hardware stack levels required when called:    2
+   885 ;; This function calls:
+   886 ;;		_read_byte
+   887 ;;		_start_bit
+   888 ;;		_stop_bit
+   889 ;;		_write_byte
+   890 ;; This function is called by:
+   891 ;;		_main
+   892 ;; This function uses a non-reentrant model
+   893 ;;
+   894                           
+   895                           	psect	text2
+   896  003AC4                     __ptext2:
+   897                           	opt callstack 0
+   898  003AC4                     _get_Temp:
+   899                           	opt callstack 28
+   900                           
+   901                           ;TC74_BCD.c: 162:     start_bit();
+   902                           
+   903                           ;incstack = 0
+   904  003AC4  EC05  F01D         	call	_start_bit	;wreg free
+   905                           
+   906                           ;TC74_BCD.c: 163:     write_byte(0x90);
+   907  003AC8  0E00               	movlw	0
+   908  003ACA  6E03               	movwf	write_byte@x+1,c
+   909  003ACC  0E90               	movlw	144
+   910  003ACE  6E02               	movwf	write_byte@x,c
+   911  003AD0  EC0D  F01D         	call	_write_byte	;wreg free
+   912                           
+   913                           ;TC74_BCD.c: 164:     write_byte(0x00);
+   914  003AD4  0E00               	movlw	0
+   915  003AD6  6E03               	movwf	write_byte@x+1,c
+   916  003AD8  0E00               	movlw	0
+   917  003ADA  6E02               	movwf	write_byte@x,c
+   918  003ADC  EC0D  F01D         	call	_write_byte	;wreg free
+   919                           
+   920                           ;TC74_BCD.c: 165:     start_bit();
+   921  003AE0  EC05  F01D         	call	_start_bit	;wreg free
+   922                           
+   923                           ;TC74_BCD.c: 166:     write_byte(0x91);
+   924  003AE4  0E00               	movlw	0
+   925  003AE6  6E03               	movwf	write_byte@x+1,c
+   926  003AE8  0E91               	movlw	145
+   927  003AEA  6E02               	movwf	write_byte@x,c
+   928  003AEC  EC0D  F01D         	call	_write_byte	;wreg free
+   929                           
+   930                           ;TC74_BCD.c: 167:     temp = read_byte();
+   931  003AF0  EC22  F01D         	call	_read_byte	;wreg free
+   932  003AF4  C002  F019         	movff	?_read_byte,_temp
+   933  003AF8  C003  F01A         	movff	?_read_byte+1,_temp+1
+   934                           
+   935                           ;TC74_BCD.c: 168:     stop_bit();
+   936  003AFC  EC09  F01D         	call	_stop_bit	;wreg free
+   937  003B00  0012               	return		;funcret
+   938  003B02                     __end_of_get_Temp:
+   939                           	opt callstack 0
+   940                           
+   941 ;; *************** function _write_byte *****************
+   942 ;; Defined at:
+   943 ;;		line 138 in file "TC74_BCD.c"
+   944 ;; Parameters:    Size  Location     Type
+   945 ;;  x               2    1[COMRAM] unsigned int 
+   946 ;; Auto vars:     Size  Location     Type
+   947 ;;		None
+   948 ;; Return value:  Size  Location     Type
+   949 ;;                  1    wreg      void 
+   950 ;; Registers used:
+   951 ;;		wreg, status,2, status,0, cstack
+   952 ;; Tracked objects:
+   953 ;;		On entry : 0/0
+   954 ;;		On exit  : 0/0
+   955 ;;		Unchanged: 0/0
+   956 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+   957 ;;      Params:         2       0       0       0
+   958 ;;      Locals:         0       0       0       0
+   959 ;;      Temps:          0       0       0       0
+   960 ;;      Totals:         2       0       0       0
+   961 ;;Total ram usage:        2 bytes
+   962 ;; Hardware stack levels used:    1
+   963 ;; Hardware stack levels required when called:    1
+   964 ;; This function calls:
+   965 ;;		_I2C_wait
+   966 ;; This function is called by:
+   967 ;;		_get_Temp
+   968 ;; This function uses a non-reentrant model
+   969 ;;
+   970                           
+   971                           	psect	text3
+   972  003A1A                     __ptext3:
+   973                           	opt callstack 0
+   974  003A1A                     _write_byte:
+   975                           	opt callstack 28
+   976                           
+   977                           ;TC74_BCD.c: 139:     I2C_wait();
+   978                           
+   979                           ;incstack = 0
+   980  003A1A  EC19  F01D         	call	_I2C_wait	;wreg free
+   981                           
+   982                           ;TC74_BCD.c: 140:     SSPBUF = x;
+   983  003A1E  C002  FFC9         	movff	write_byte@x,4041	;volatile
+   984  003A22  0012               	return		;funcret
+   985  003A24                     __end_of_write_byte:
+   986                           	opt callstack 0
+   987                           
+   988 ;; *************** function _stop_bit *****************
+   989 ;; Defined at:
+   990 ;;		line 132 in file "TC74_BCD.c"
+   991 ;; Parameters:    Size  Location     Type
+   992 ;;		None
+   993 ;; Auto vars:     Size  Location     Type
+   994 ;;		None
+   995 ;; Return value:  Size  Location     Type
+   996 ;;                  1    wreg      void 
+   997 ;; Registers used:
+   998 ;;		wreg, status,2, status,0, cstack
+   999 ;; Tracked objects:
+  1000 ;;		On entry : 0/0
+  1001 ;;		On exit  : 0/0
+  1002 ;;		Unchanged: 0/0
+  1003 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+  1004 ;;      Params:         0       0       0       0
+  1005 ;;      Locals:         0       0       0       0
+  1006 ;;      Temps:          0       0       0       0
+  1007 ;;      Totals:         0       0       0       0
+  1008 ;;Total ram usage:        0 bytes
+  1009 ;; Hardware stack levels used:    1
+  1010 ;; Hardware stack levels required when called:    1
+  1011 ;; This function calls:
+  1012 ;;		_I2C_wait
+  1013 ;; This function is called by:
+  1014 ;;		_get_Temp
+  1015 ;; This function uses a non-reentrant model
+  1016 ;;
+  1017                           
+  1018                           	psect	text4
+  1019  003A12                     __ptext4:
+  1020                           	opt callstack 0
+  1021  003A12                     _stop_bit:
+  1022                           	opt callstack 28
+  1023                           
+  1024                           ;TC74_BCD.c: 133:     I2C_wait();
+  1025                           
+  1026                           ;incstack = 0
+  1027  003A12  EC19  F01D         	call	_I2C_wait	;wreg free
+  1028                           
+  1029                           ;TC74_BCD.c: 134:     PEN = 1;
+  1030  003A16  84C5               	bsf	4037,2,c	;volatile
+  1031  003A18  0012               	return		;funcret
+  1032  003A1A                     __end_of_stop_bit:
+  1033                           	opt callstack 0
+  1034                           
+  1035 ;; *************** function _start_bit *****************
+  1036 ;; Defined at:
+  1037 ;;		line 126 in file "TC74_BCD.c"
+  1038 ;; Parameters:    Size  Location     Type
+  1039 ;;		None
+  1040 ;; Auto vars:     Size  Location     Type
+  1041 ;;		None
+  1042 ;; Return value:  Size  Location     Type
+  1043 ;;                  1    wreg      void 
+  1044 ;; Registers used:
+  1045 ;;		wreg, status,2, status,0, cstack
+  1046 ;; Tracked objects:
+  1047 ;;		On entry : 0/0
+  1048 ;;		On exit  : 0/0
+  1049 ;;		Unchanged: 0/0
+  1050 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+  1051 ;;      Params:         0       0       0       0
+  1052 ;;      Locals:         0       0       0       0
+  1053 ;;      Temps:          0       0       0       0
+  1054 ;;      Totals:         0       0       0       0
+  1055 ;;Total ram usage:        0 bytes
+  1056 ;; Hardware stack levels used:    1
+  1057 ;; Hardware stack levels required when called:    1
+  1058 ;; This function calls:
+  1059 ;;		_I2C_wait
+  1060 ;; This function is called by:
+  1061 ;;		_get_Temp
+  1062 ;; This function uses a non-reentrant model
+  1063 ;;
+  1064                           
+  1065                           	psect	text5
+  1066  003A0A                     __ptext5:
+  1067                           	opt callstack 0
+  1068  003A0A                     _start_bit:
+  1069                           	opt callstack 28
+  1070                           
+  1071                           ;TC74_BCD.c: 127:     I2C_wait();
+  1072                           
+  1073                           ;incstack = 0
+  1074  003A0A  EC19  F01D         	call	_I2C_wait	;wreg free
+  1075                           
+  1076                           ;TC74_BCD.c: 128:     SEN = 1;
+  1077  003A0E  80C5               	bsf	4037,0,c	;volatile
+  1078  003A10  0012               	return		;funcret
+  1079  003A12                     __end_of_start_bit:
+  1080                           	opt callstack 0
+  1081                           
+  1082 ;; *************** function _read_byte *****************
+  1083 ;; Defined at:
+  1084 ;;		line 144 in file "TC74_BCD.c"
+  1085 ;; Parameters:    Size  Location     Type
+  1086 ;;		None
+  1087 ;; Auto vars:     Size  Location     Type
+  1088 ;;  x               2    3[COMRAM] int 
+  1089 ;; Return value:  Size  Location     Type
+  1090 ;;                  2    1[COMRAM] int 
+  1091 ;; Registers used:
+  1092 ;;		wreg, status,2, status,0, cstack
+  1093 ;; Tracked objects:
+  1094 ;;		On entry : 0/0
+  1095 ;;		On exit  : 0/0
+  1096 ;;		Unchanged: 0/0
+  1097 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+  1098 ;;      Params:         2       0       0       0
+  1099 ;;      Locals:         2       0       0       0
+  1100 ;;      Temps:          0       0       0       0
+  1101 ;;      Totals:         4       0       0       0
+  1102 ;;Total ram usage:        4 bytes
+  1103 ;; Hardware stack levels used:    1
+  1104 ;; Hardware stack levels required when called:    1
+  1105 ;; This function calls:
+  1106 ;;		_I2C_wait
+  1107 ;; This function is called by:
+  1108 ;;		_get_Temp
+  1109 ;; This function uses a non-reentrant model
+  1110 ;;
+  1111                           
+  1112                           	psect	text6
+  1113  003A44                     __ptext6:
+  1114                           	opt callstack 0
+  1115  003A44                     _read_byte:
+  1116                           	opt callstack 28
+  1117                           
+  1118                           ;TC74_BCD.c: 145:     I2C_wait();
+  1119                           
+  1120                           ;incstack = 0
+  1121  003A44  EC19  F01D         	call	_I2C_wait	;wreg free
+  1122                           
+  1123                           ;TC74_BCD.c: 146:     int x;;TC74_BCD.c: 147:     RCEN = 1;
+  1124  003A48  86C5               	bsf	4037,3,c	;volatile
+  1125                           
+  1126                           ;TC74_BCD.c: 148:     I2C_wait();
+  1127  003A4A  EC19  F01D         	call	_I2C_wait	;wreg free
+  1128                           
+  1129                           ;TC74_BCD.c: 149:     x = SSPBUF;
+  1130  003A4E  CFC9 F004          	movff	4041,read_byte@x	;volatile
+  1131  003A52  6A05               	clrf	read_byte@x+1,c
+  1132                           
+  1133                           ;TC74_BCD.c: 150:     I2C_wait();
+  1134  003A54  EC19  F01D         	call	_I2C_wait	;wreg free
+  1135                           
+  1136                           ;TC74_BCD.c: 151:     ACKDT = 0;
+  1137  003A58  9AC5               	bcf	4037,5,c	;volatile
+  1138                           
+  1139                           ;TC74_BCD.c: 152:     ACKEN = 1;
+  1140  003A5A  88C5               	bsf	4037,4,c	;volatile
+  1141                           
+  1142                           ;TC74_BCD.c: 153:     return x;
+  1143  003A5C  C004  F002         	movff	read_byte@x,?_read_byte
+  1144  003A60  C005  F003         	movff	read_byte@x+1,?_read_byte+1
+  1145  003A64  0012               	return		;funcret
+  1146  003A66                     __end_of_read_byte:
+  1147                           	opt callstack 0
+  1148                           
+  1149 ;; *************** function _I2C_wait *****************
+  1150 ;; Defined at:
+  1151 ;;		line 157 in file "TC74_BCD.c"
+  1152 ;; Parameters:    Size  Location     Type
+  1153 ;;		None
+  1154 ;; Auto vars:     Size  Location     Type
+  1155 ;;		None
+  1156 ;; Return value:  Size  Location     Type
+  1157 ;;                  1    wreg      void 
+  1158 ;; Registers used:
+  1159 ;;		wreg, status,2, status,0
+  1160 ;; Tracked objects:
+  1161 ;;		On entry : 0/0
+  1162 ;;		On exit  : 0/0
+  1163 ;;		Unchanged: 0/0
+  1164 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+  1165 ;;      Params:         0       0       0       0
+  1166 ;;      Locals:         0       0       0       0
+  1167 ;;      Temps:          1       0       0       0
+  1168 ;;      Totals:         1       0       0       0
+  1169 ;;Total ram usage:        1 bytes
+  1170 ;; Hardware stack levels used:    1
+  1171 ;; This function calls:
+  1172 ;;		Nothing
+  1173 ;; This function is called by:
+  1174 ;;		_start_bit
+  1175 ;;		_stop_bit
+  1176 ;;		_write_byte
+  1177 ;;		_read_byte
+  1178 ;; This function uses a non-reentrant model
+  1179 ;;
+  1180                           
+  1181                           	psect	text7
+  1182  003A32                     __ptext7:
+  1183                           	opt callstack 0
+  1184  003A32                     _I2C_wait:
+  1185                           	opt callstack 28
+  1186                           
+  1187                           ;TC74_BCD.c: 158:     while ((SSPSTAT & 0x04) || (SSPCON2 & 0x1F));
+  1188                           
+  1189                           ;incstack = 0
+  1190  003A32  B4C7               	btfsc	4039,2,c	;volatile
+  1191  003A34  D7FE               	goto	_I2C_wait
+  1192  003A36  CFC5 F001          	movff	4037,??_I2C_wait	;volatile
+  1193  003A3A  0E1F               	movlw	31
+  1194  003A3C  1601               	andwf	??_I2C_wait,f,c
+  1195  003A3E  B4D8               	btfsc	status,2,c
+  1196  003A40  0012               	return	
+  1197  003A42  D7F7               	goto	_I2C_wait
+  1198  003A44                     __end_of_I2C_wait:
+  1199                           	opt callstack 0
+  1200                           
+  1201 ;; *************** function _encode_Temp *****************
+  1202 ;; Defined at:
+  1203 ;;		line 171 in file "TC74_BCD.c"
+  1204 ;; Parameters:    Size  Location     Type
+  1205 ;;  x               2    0[COMRAM] int 
+  1206 ;; Auto vars:     Size  Location     Type
+  1207 ;;  sequence        1    4[COMRAM] unsigned char 
+  1208 ;; Return value:  Size  Location     Type
+  1209 ;;                  1    wreg      unsigned char 
+  1210 ;; Registers used:
+  1211 ;;		wreg, status,2, status,0
+  1212 ;; Tracked objects:
+  1213 ;;		On entry : 0/0
+  1214 ;;		On exit  : 0/0
+  1215 ;;		Unchanged: 0/0
+  1216 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+  1217 ;;      Params:         2       0       0       0
+  1218 ;;      Locals:         1       0       0       0
+  1219 ;;      Temps:          2       0       0       0
+  1220 ;;      Totals:         5       0       0       0
+  1221 ;;Total ram usage:        5 bytes
+  1222 ;; Hardware stack levels used:    1
+  1223 ;; This function calls:
+  1224 ;;		Nothing
+  1225 ;; This function is called by:
+  1226 ;;		_main
+  1227 ;; This function uses a non-reentrant model
+  1228 ;;
+  1229                           
+  1230                           	psect	text8
+  1231  003B72                     __ptext8:
+  1232                           	opt callstack 0
+  1233  003B72                     _encode_Temp:
+  1234                           	opt callstack 30
+  1235                           
+  1236                           ;TC74_BCD.c: 172:   unsigned char sequence;;TC74_BCD.c: 173:   switch(x){
+  1237                           
+  1238                           ;incstack = 0
+  1239  003B72  D013               	goto	l1092
+  1240  003B74                     l1072:
+  1241                           
+  1242                           ;TC74_BCD.c: 175:       sequence = 0x60;
+  1243  003B74  0E60               	movlw	96
+  1244  003B76  D00F               	goto	L8
+  1245  003B78                     l1074:
+  1246                           
+  1247                           ;TC74_BCD.c: 178:       sequence = 0xDA;
+  1248  003B78  0EDA               	movlw	218
+  1249  003B7A  D00D               	goto	L8
+  1250  003B7C                     l1076:
+  1251                           
+  1252                           ;TC74_BCD.c: 181:       sequence = 0xF2;
+  1253  003B7C  0EF2               	movlw	242
+  1254  003B7E  D00B               	goto	L8
+  1255  003B80                     l1078:
+  1256                           
+  1257                           ;TC74_BCD.c: 184:       sequence = 0x66;
+  1258  003B80  0E66               	movlw	102
+  1259  003B82  D009               	goto	L8
+  1260  003B84                     l1080:
+  1261                           
+  1262                           ;TC74_BCD.c: 187:       sequence = 0xB6;
+  1263  003B84  0EB6               	movlw	182
+  1264  003B86  D007               	goto	L8
+  1265  003B88                     l1082:
+  1266                           
+  1267                           ;TC74_BCD.c: 190:       sequence = 0xBE;
+  1268  003B88  0EBE               	movlw	190
+  1269  003B8A  D005               	goto	L8
+  1270  003B8C                     l1084:
+  1271                           
+  1272                           ;TC74_BCD.c: 193:       sequence = 0xE0;
+  1273  003B8C  0EE0               	movlw	224
+  1274  003B8E  D003               	goto	L8
+  1275  003B90                     l1086:
+  1276                           
+  1277                           ;TC74_BCD.c: 196:       sequence = 0xFE;
+  1278  003B90  0EFE               	movlw	254
+  1279  003B92  D001               	goto	L8
+  1280  003B94                     l1088:
+  1281                           
+  1282                           ;TC74_BCD.c: 201:       sequence = 0xFC;
+  1283                           
+  1284                           ;TC74_BCD.c: 200:     default:
+  1285  003B94  0EFC               	movlw	252
+  1286  003B96                     L8:
+  1287  003B96  6E05               	movwf	encode_Temp@sequence,c
+  1288                           
+  1289                           ;TC74_BCD.c: 202:       break;
+  1290  003B98  D023               	goto	l1094
+  1291  003B9A                     l1092:
+  1292  003B9A  C001  F003         	movff	encode_Temp@x,??_encode_Temp
+  1293  003B9E  C002  F004         	movff	encode_Temp@x+1,??_encode_Temp+1
+  1294                           
+  1295                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+      +                          itches
+  1296                           ; Switch size 1, requested type "simple"
+  1297                           ; Number of cases is 1, Range of values is 0 to 0
+  1298                           ; switch strategies available:
+  1299                           ; Name         Instructions Cycles
+  1300                           ; simple_byte            4     3 (average)
+  1301                           ;	Chosen strategy is simple_byte
+  1302  003BA2  5004               	movf	??_encode_Temp+1,w,c
+  1303  003BA4  0A00               	xorlw	0	; case 0
+  1304  003BA6  A4D8               	btfss	status,2,c
+  1305  003BA8  D7F5               	goto	l1088
+  1306                           
+  1307                           ; Switch size 1, requested type "simple"
+  1308                           ; Number of cases is 9, Range of values is 1 to 9
+  1309                           ; switch strategies available:
+  1310                           ; Name         Instructions Cycles
+  1311                           ; simple_byte           28    15 (average)
+  1312                           ;	Chosen strategy is simple_byte
+  1313  003BAA  5003               	movf	??_encode_Temp,w,c
+  1314  003BAC  0A01               	xorlw	1	; case 1
+  1315  003BAE  B4D8               	btfsc	status,2,c
+  1316  003BB0  D7E1               	goto	l1072
+  1317  003BB2  0A03               	xorlw	3	; case 2
+  1318  003BB4  B4D8               	btfsc	status,2,c
+  1319  003BB6  D7E0               	goto	l1074
+  1320  003BB8  0A01               	xorlw	1	; case 3
+  1321  003BBA  B4D8               	btfsc	status,2,c
+  1322  003BBC  D7DF               	goto	l1076
+  1323  003BBE  0A07               	xorlw	7	; case 4
+  1324  003BC0  B4D8               	btfsc	status,2,c
+  1325  003BC2  D7DE               	goto	l1078
+  1326  003BC4  0A01               	xorlw	1	; case 5
+  1327  003BC6  B4D8               	btfsc	status,2,c
+  1328  003BC8  D7DD               	goto	l1080
+  1329  003BCA  0A03               	xorlw	3	; case 6
+  1330  003BCC  B4D8               	btfsc	status,2,c
+  1331  003BCE  D7DC               	goto	l1082
+  1332  003BD0  0A01               	xorlw	1	; case 7
+  1333  003BD2  B4D8               	btfsc	status,2,c
+  1334  003BD4  D7DB               	goto	l1084
+  1335  003BD6  0A0F               	xorlw	15	; case 8
+  1336  003BD8  B4D8               	btfsc	status,2,c
+  1337  003BDA  D7DA               	goto	l1086
+  1338  003BDC  0A01               	xorlw	1	; case 9
+  1339  003BDE  D7DA               	goto	l1088
+  1340  003BE0                     l1094:
+  1341                           
+  1342                           ;TC74_BCD.c: 204:   return sequence;
+  1343  003BE0  5005               	movf	encode_Temp@sequence,w,c
+  1344  003BE2  0012               	return		;funcret
+  1345  003BE4                     __end_of_encode_Temp:
+  1346                           	opt callstack 0
+  1347                           
+  1348 ;; *************** function ___wmul *****************
+  1349 ;; Defined at:
+  1350 ;;		line 15 in file "C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\Umul16.c"
+  1351 ;; Parameters:    Size  Location     Type
+  1352 ;;  multiplier      2    0[COMRAM] unsigned int 
+  1353 ;;  multiplicand    2    2[COMRAM] unsigned int 
+  1354 ;; Auto vars:     Size  Location     Type
+  1355 ;;  product         2    4[COMRAM] unsigned int 
+  1356 ;; Return value:  Size  Location     Type
+  1357 ;;                  2    0[COMRAM] unsigned int 
+  1358 ;; Registers used:
+  1359 ;;		wreg, status,2, status,0, prodl, prodh
+  1360 ;; Tracked objects:
+  1361 ;;		On entry : 0/0
+  1362 ;;		On exit  : 0/0
+  1363 ;;		Unchanged: 0/0
+  1364 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+  1365 ;;      Params:         4       0       0       0
+  1366 ;;      Locals:         2       0       0       0
+  1367 ;;      Temps:          0       0       0       0
+  1368 ;;      Totals:         6       0       0       0
+  1369 ;;Total ram usage:        6 bytes
+  1370 ;; Hardware stack levels used:    1
+  1371 ;; This function calls:
+  1372 ;;		Nothing
+  1373 ;; This function is called by:
+  1374 ;;		_main
+  1375 ;; This function uses a non-reentrant model
+  1376 ;;
+  1377                           
+  1378                           	psect	text9
+  1379  003A66                     __ptext9:
+  1380                           	opt callstack 0
+  1381  003A66                     ___wmul:
+  1382                           	opt callstack 30
+  1383                           
+  1384                           ;incstack = 0
+  1385  003A66  5001               	movf	___wmul@multiplier,w,c
+  1386  003A68  0203               	mulwf	___wmul@multiplicand,c
+  1387  003A6A  CFF3 F005          	movff	prodl,___wmul@product
+  1388  003A6E  CFF4 F006          	movff	prodh,___wmul@product+1
+  1389  003A72  5001               	movf	___wmul@multiplier,w,c
+  1390  003A74  0204               	mulwf	___wmul@multiplicand+1,c
+  1391  003A76  50F3               	movf	prodl,w,c
+  1392  003A78  2606               	addwf	___wmul@product+1,f,c
+  1393  003A7A  5002               	movf	___wmul@multiplier+1,w,c
+  1394  003A7C  0203               	mulwf	___wmul@multiplicand,c
+  1395  003A7E  50F3               	movf	prodl,w,c
+  1396  003A80  2606               	addwf	___wmul@product+1,f,c
+  1397  003A82  C005  F001         	movff	___wmul@product,?___wmul
+  1398  003A86  C006  F002         	movff	___wmul@product+1,?___wmul+1
+  1399  003A8A  0012               	return		;funcret
+  1400  003A8C                     __end_of___wmul:
+  1401                           	opt callstack 0
+  1402                           
+  1403 ;; *************** function ___awmod *****************
+  1404 ;; Defined at:
+  1405 ;;		line 7 in file "C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\awmod.c"
+  1406 ;; Parameters:    Size  Location     Type
+  1407 ;;  dividend        2    0[COMRAM] int 
+  1408 ;;  divisor         2    2[COMRAM] int 
+  1409 ;; Auto vars:     Size  Location     Type
+  1410 ;;  sign            1    5[COMRAM] unsigned char 
+  1411 ;;  counter         1    4[COMRAM] unsigned char 
+  1412 ;; Return value:  Size  Location     Type
+  1413 ;;                  2    0[COMRAM] int 
+  1414 ;; Registers used:
+  1415 ;;		wreg, status,2, status,0
+  1416 ;; Tracked objects:
+  1417 ;;		On entry : 0/0
+  1418 ;;		On exit  : 0/0
+  1419 ;;		Unchanged: 0/0
+  1420 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+  1421 ;;      Params:         4       0       0       0
+  1422 ;;      Locals:         2       0       0       0
+  1423 ;;      Temps:          0       0       0       0
+  1424 ;;      Totals:         6       0       0       0
+  1425 ;;Total ram usage:        6 bytes
+  1426 ;; Hardware stack levels used:    1
+  1427 ;; This function calls:
+  1428 ;;		Nothing
+  1429 ;; This function is called by:
+  1430 ;;		_main
+  1431 ;; This function uses a non-reentrant model
+  1432 ;;
+  1433                           
+  1434                           	psect	text10
+  1435  003B02                     __ptext10:
+  1436                           	opt callstack 0
+  1437  003B02                     ___awmod:
+  1438                           	opt callstack 30
+  1439                           
+  1440                           ;incstack = 0
+  1441  003B02  0E00               	movlw	0
+  1442  003B04  6E06               	movwf	___awmod@sign,c
+  1443  003B06  AE02               	btfss	___awmod@dividend+1,7,c
+  1444  003B08  D006               	goto	l1240
+  1445  003B0A  6C01               	negf	___awmod@dividend,c
+  1446  003B0C  1E02               	comf	___awmod@dividend+1,f,c
+  1447  003B0E  B0D8               	btfsc	status,0,c
+  1448  003B10  2A02               	incf	___awmod@dividend+1,f,c
+  1449  003B12  0E01               	movlw	1
+  1450  003B14  6E06               	movwf	___awmod@sign,c
+  1451  003B16                     l1240:
+  1452  003B16  AE04               	btfss	___awmod@divisor+1,7,c
+  1453  003B18  D004               	goto	l1244
+  1454  003B1A  6C03               	negf	___awmod@divisor,c
+  1455  003B1C  1E04               	comf	___awmod@divisor+1,f,c
+  1456  003B1E  B0D8               	btfsc	status,0,c
+  1457  003B20  2A04               	incf	___awmod@divisor+1,f,c
+  1458  003B22                     l1244:
+  1459  003B22  5003               	movf	___awmod@divisor,w,c
+  1460  003B24  1004               	iorwf	___awmod@divisor+1,w,c
+  1461  003B26  B4D8               	btfsc	status,2,c
+  1462  003B28  D018               	goto	l1260
+  1463  003B2A  0E01               	movlw	1
+  1464  003B2C  6E05               	movwf	___awmod@counter,c
+  1465  003B2E  D004               	goto	l1250
+  1466  003B30                     l1248:
+  1467  003B30  90D8               	bcf	status,0,c
+  1468  003B32  3603               	rlcf	___awmod@divisor,f,c
+  1469  003B34  3604               	rlcf	___awmod@divisor+1,f,c
+  1470  003B36  2A05               	incf	___awmod@counter,f,c
+  1471  003B38                     l1250:
+  1472  003B38  AE04               	btfss	___awmod@divisor+1,7,c
+  1473  003B3A  D7FA               	goto	l1248
+  1474  003B3C                     u440:
+  1475  003B3C  5003               	movf	___awmod@divisor,w,c
+  1476  003B3E  5C01               	subwf	___awmod@dividend,w,c
+  1477  003B40  5004               	movf	___awmod@divisor+1,w,c
+  1478  003B42  5802               	subwfb	___awmod@dividend+1,w,c
+  1479  003B44  A0D8               	btfss	status,0,c
+  1480  003B46  D004               	goto	l1256
+  1481  003B48  5003               	movf	___awmod@divisor,w,c
+  1482  003B4A  5E01               	subwf	___awmod@dividend,f,c
+  1483  003B4C  5004               	movf	___awmod@divisor+1,w,c
+  1484  003B4E  5A02               	subwfb	___awmod@dividend+1,f,c
+  1485  003B50                     l1256:
+  1486  003B50  90D8               	bcf	status,0,c
+  1487  003B52  3204               	rrcf	___awmod@divisor+1,f,c
+  1488  003B54  3203               	rrcf	___awmod@divisor,f,c
+  1489  003B56  2E05               	decfsz	___awmod@counter,f,c
+  1490  003B58  D7F1               	goto	u440
+  1491  003B5A                     l1260:
+  1492  003B5A  5006               	movf	___awmod@sign,w,c
+  1493  003B5C  B4D8               	btfsc	status,2,c
+  1494  003B5E  D004               	goto	l1264
+  1495  003B60  6C01               	negf	___awmod@dividend,c
+  1496  003B62  1E02               	comf	___awmod@dividend+1,f,c
+  1497  003B64  B0D8               	btfsc	status,0,c
+  1498  003B66  2A02               	incf	___awmod@dividend+1,f,c
+  1499  003B68                     l1264:
+  1500  003B68  C001  F001         	movff	___awmod@dividend,?___awmod
+  1501  003B6C  C002  F002         	movff	___awmod@dividend+1,?___awmod+1
+  1502  003B70  0012               	return		;funcret
+  1503  003B72                     __end_of___awmod:
+  1504                           	opt callstack 0
+  1505                           
+  1506 ;; *************** function ___awdiv *****************
+  1507 ;; Defined at:
+  1508 ;;		line 7 in file "C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\awdiv.c"
+  1509 ;; Parameters:    Size  Location     Type
+  1510 ;;  dividend        2    6[COMRAM] int 
+  1511 ;;  divisor         2    8[COMRAM] int 
+  1512 ;; Auto vars:     Size  Location     Type
+  1513 ;;  quotient        2   12[COMRAM] int 
+  1514 ;;  sign            1   11[COMRAM] unsigned char 
+  1515 ;;  counter         1   10[COMRAM] unsigned char 
+  1516 ;; Return value:  Size  Location     Type
+  1517 ;;                  2    6[COMRAM] int 
+  1518 ;; Registers used:
+  1519 ;;		wreg, status,2, status,0
+  1520 ;; Tracked objects:
+  1521 ;;		On entry : 0/0
+  1522 ;;		On exit  : 0/0
+  1523 ;;		Unchanged: 0/0
+  1524 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+  1525 ;;      Params:         4       0       0       0
+  1526 ;;      Locals:         4       0       0       0
+  1527 ;;      Temps:          0       0       0       0
+  1528 ;;      Totals:         8       0       0       0
+  1529 ;;Total ram usage:        8 bytes
+  1530 ;; Hardware stack levels used:    1
+  1531 ;; This function calls:
+  1532 ;;		Nothing
+  1533 ;; This function is called by:
+  1534 ;;		_main
+  1535 ;; This function uses a non-reentrant model
+  1536 ;;
+  1537                           
+  1538                           	psect	text11
+  1539  003BE4                     __ptext11:
+  1540                           	opt callstack 0
+  1541  003BE4                     ___awdiv:
+  1542                           	opt callstack 30
+  1543                           
+  1544                           ;incstack = 0
+  1545  003BE4  0E00               	movlw	0
+  1546  003BE6  6E0C               	movwf	___awdiv@sign,c
+  1547  003BE8  AE0A               	btfss	___awdiv@divisor+1,7,c
+  1548  003BEA  D006               	goto	l1196
+  1549  003BEC  6C09               	negf	___awdiv@divisor,c
+  1550  003BEE  1E0A               	comf	___awdiv@divisor+1,f,c
+  1551  003BF0  B0D8               	btfsc	status,0,c
+  1552  003BF2  2A0A               	incf	___awdiv@divisor+1,f,c
+  1553  003BF4  0E01               	movlw	1
+  1554  003BF6  6E0C               	movwf	___awdiv@sign,c
+  1555  003BF8                     l1196:
+  1556  003BF8  AE08               	btfss	___awdiv@dividend+1,7,c
+  1557  003BFA  D006               	goto	l1202
+  1558  003BFC  6C07               	negf	___awdiv@dividend,c
+  1559  003BFE  1E08               	comf	___awdiv@dividend+1,f,c
+  1560  003C00  B0D8               	btfsc	status,0,c
+  1561  003C02  2A08               	incf	___awdiv@dividend+1,f,c
+  1562  003C04  0E01               	movlw	1
+  1563  003C06  1A0C               	xorwf	___awdiv@sign,f,c
+  1564  003C08                     l1202:
+  1565  003C08  0E00               	movlw	0
+  1566  003C0A  6E0E               	movwf	___awdiv@quotient+1,c
+  1567  003C0C  0E00               	movlw	0
+  1568  003C0E  6E0D               	movwf	___awdiv@quotient,c
+  1569  003C10  5009               	movf	___awdiv@divisor,w,c
+  1570  003C12  100A               	iorwf	___awdiv@divisor+1,w,c
+  1571  003C14  B4D8               	btfsc	status,2,c
+  1572  003C16  D01C               	goto	l1224
+  1573  003C18  0E01               	movlw	1
+  1574  003C1A  6E0B               	movwf	___awdiv@counter,c
+  1575  003C1C  D004               	goto	l1210
+  1576  003C1E                     l1208:
+  1577  003C1E  90D8               	bcf	status,0,c
+  1578  003C20  3609               	rlcf	___awdiv@divisor,f,c
+  1579  003C22  360A               	rlcf	___awdiv@divisor+1,f,c
+  1580  003C24  2A0B               	incf	___awdiv@counter,f,c
+  1581  003C26                     l1210:
+  1582  003C26  AE0A               	btfss	___awdiv@divisor+1,7,c
+  1583  003C28  D7FA               	goto	l1208
+  1584  003C2A                     u380:
+  1585  003C2A  90D8               	bcf	status,0,c
+  1586  003C2C  360D               	rlcf	___awdiv@quotient,f,c
+  1587  003C2E  360E               	rlcf	___awdiv@quotient+1,f,c
+  1588  003C30  5009               	movf	___awdiv@divisor,w,c
+  1589  003C32  5C07               	subwf	___awdiv@dividend,w,c
+  1590  003C34  500A               	movf	___awdiv@divisor+1,w,c
+  1591  003C36  5808               	subwfb	___awdiv@dividend+1,w,c
+  1592  003C38  A0D8               	btfss	status,0,c
+  1593  003C3A  D005               	goto	l1220
+  1594  003C3C  5009               	movf	___awdiv@divisor,w,c
+  1595  003C3E  5E07               	subwf	___awdiv@dividend,f,c
+  1596  003C40  500A               	movf	___awdiv@divisor+1,w,c
+  1597  003C42  5A08               	subwfb	___awdiv@dividend+1,f,c
+  1598  003C44  800D               	bsf	___awdiv@quotient,0,c
+  1599  003C46                     l1220:
+  1600  003C46  90D8               	bcf	status,0,c
+  1601  003C48  320A               	rrcf	___awdiv@divisor+1,f,c
+  1602  003C4A  3209               	rrcf	___awdiv@divisor,f,c
+  1603  003C4C  2E0B               	decfsz	___awdiv@counter,f,c
+  1604  003C4E  D7ED               	goto	u380
+  1605  003C50                     l1224:
+  1606  003C50  500C               	movf	___awdiv@sign,w,c
+  1607  003C52  B4D8               	btfsc	status,2,c
+  1608  003C54  D004               	goto	l1228
+  1609  003C56  6C0D               	negf	___awdiv@quotient,c
+  1610  003C58  1E0E               	comf	___awdiv@quotient+1,f,c
+  1611  003C5A  B0D8               	btfsc	status,0,c
+  1612  003C5C  2A0E               	incf	___awdiv@quotient+1,f,c
+  1613  003C5E                     l1228:
+  1614  003C5E  C00D  F007         	movff	___awdiv@quotient,?___awdiv
+  1615  003C62  C00E  F008         	movff	___awdiv@quotient+1,?___awdiv+1
+  1616  003C66  0012               	return		;funcret
+  1617  003C68                     __end_of___awdiv:
+  1618                           	opt callstack 0
+  1619                           
+  1620 ;; *************** function _Initialize *****************
+  1621 ;; Defined at:
+  1622 ;;		line 107 in file "TC74_BCD.c"
+  1623 ;; Parameters:    Size  Location     Type
+  1624 ;;		None
+  1625 ;; Auto vars:     Size  Location     Type
+  1626 ;;		None
+  1627 ;; Return value:  Size  Location     Type
+  1628 ;;                  1    wreg      void 
+  1629 ;; Registers used:
+  1630 ;;		wreg, status,2
+  1631 ;; Tracked objects:
+  1632 ;;		On entry : 0/0
+  1633 ;;		On exit  : 0/0
+  1634 ;;		Unchanged: 0/0
+  1635 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+  1636 ;;      Params:         0       0       0       0
+  1637 ;;      Locals:         0       0       0       0
+  1638 ;;      Temps:          1       0       0       0
+  1639 ;;      Totals:         1       0       0       0
+  1640 ;;Total ram usage:        1 bytes
+  1641 ;; Hardware stack levels used:    1
+  1642 ;; This function calls:
+  1643 ;;		Nothing
+  1644 ;; This function is called by:
+  1645 ;;		_main
+  1646 ;; This function uses a non-reentrant model
+  1647 ;;
+  1648                           
+  1649                           	psect	text12
+  1650  003A8C                     __ptext12:
+  1651                           	opt callstack 0
+  1652  003A8C                     _Initialize:
+  1653                           	opt callstack 30
+  1654                           
+  1655                           ;TC74_BCD.c: 108:     OSCCON = 0x58;
+  1656                           
+  1657                           ;incstack = 0
+  1658  003A8C  0E58               	movlw	88
+  1659  003A8E  6ED3               	movwf	4051,c	;volatile
+  1660                           
+  1661                           ;TC74_BCD.c: 109:     TRISCbits.RC0 = 0;
+  1662  003A90  9094               	bcf	3988,0,c	;volatile
+  1663                           
+  1664                           ;TC74_BCD.c: 110:     TRISCbits.RC1 = 0;
+  1665  003A92  9294               	bcf	3988,1,c	;volatile
+  1666                           
+  1667                           ;TC74_BCD.c: 111:     TRISCbits.RC2 = 0;
+  1668  003A94  9494               	bcf	3988,2,c	;volatile
+  1669                           
+  1670                           ;TC74_BCD.c: 112:     TRISCbits.RC3 = 0;
+  1671  003A96  9694               	bcf	3988,3,c	;volatile
+  1672                           
+  1673                           ;TC74_BCD.c: 113:     TRISCbits.RC4 = 0;
+  1674  003A98  9894               	bcf	3988,4,c	;volatile
+  1675                           
+  1676                           ;TC74_BCD.c: 114:     TRISCbits.RC5 = 0;
+  1677  003A9A  9A94               	bcf	3988,5,c	;volatile
+  1678                           
+  1679                           ;TC74_BCD.c: 115:     TRISCbits.RC6 = 0;
+  1680  003A9C  9C94               	bcf	3988,6,c	;volatile
+  1681                           
+  1682                           ;TC74_BCD.c: 116:     SSPCON1 = 0x28;
+  1683  003A9E  0E28               	movlw	40
+  1684  003AA0  6EC6               	movwf	4038,c	;volatile
+  1685                           
+  1686                           ;TC74_BCD.c: 117:     SSPCON2 = 0x00;
+  1687  003AA2  0E00               	movlw	0
+  1688  003AA4  6EC5               	movwf	4037,c	;volatile
+  1689                           
+  1690                           ;TC74_BCD.c: 118:     SSPADD = 0x09;
+  1691  003AA6  0E09               	movlw	9
+  1692  003AA8  6EC8               	movwf	4040,c	;volatile
+  1693                           
+  1694                           ;TC74_BCD.c: 119:     SSPSTAT = 0x00;
+  1695  003AAA  0E00               	movlw	0
+  1696  003AAC  6EC7               	movwf	4039,c	;volatile
+  1697                           
+  1698                           ;TC74_BCD.c: 120:     LATCbits.LC2 = 0;
+  1699  003AAE  948B               	bcf	3979,2,c	;volatile
+  1700                           
+  1701                           ;TC74_BCD.c: 121:     _delay((unsigned long)((50)*(4000000/4000.0)));
+  1702  003AB0  0E41               	movlw	65
+  1703  003AB2  6E01               	movwf	??_Initialize& (0+255),c
+  1704  003AB4  0EEE               	movlw	238
+  1705  003AB6                     u517:
+  1706  003AB6  2EE8               	decfsz	wreg,f,c
+  1707  003AB8  D7FE               	bra	u517
+  1708  003ABA  2E01               	decfsz	??_Initialize& (0+255),f,c
+  1709  003ABC  D7FC               	bra	u517
+  1710  003ABE  D000               	nop2	
+  1711                           
+  1712                           ;TC74_BCD.c: 122:     LATCbits.LC2 = 1;
+  1713  003AC0  848B               	bsf	3979,2,c	;volatile
+  1714  003AC2  0012               	return		;funcret
+  1715  003AC4                     __end_of_Initialize:
+  1716                           	opt callstack 0
+  1717  0000                     
+  1718                           	psect	rparam
+  1719  0000                     tosu	equ	0xFFF
+  1720                           tosh	equ	0xFFE
+  1721                           tosl	equ	0xFFD
+  1722                           stkptr	equ	0xFFC
+  1723                           pclatu	equ	0xFFB
+  1724                           pclath	equ	0xFFA
+  1725                           pcl	equ	0xFF9
+  1726                           tblptru	equ	0xFF8
+  1727                           tblptrh	equ	0xFF7
+  1728                           tblptrl	equ	0xFF6
+  1729                           tablat	equ	0xFF5
+  1730                           prodh	equ	0xFF4
+  1731                           prodl	equ	0xFF3
+  1732                           indf0	equ	0xFEF
+  1733                           postinc0	equ	0xFEE
+  1734                           postdec0	equ	0xFED
+  1735                           preinc0	equ	0xFEC
+  1736                           plusw0	equ	0xFEB
+  1737                           fsr0h	equ	0xFEA
+  1738                           fsr0l	equ	0xFE9
+  1739                           wreg	equ	0xFE8
+  1740                           indf1	equ	0xFE7
+  1741                           postinc1	equ	0xFE6
+  1742                           postdec1	equ	0xFE5
+  1743                           preinc1	equ	0xFE4
+  1744                           plusw1	equ	0xFE3
+  1745                           fsr1h	equ	0xFE2
+  1746                           fsr1l	equ	0xFE1
+  1747                           bsr	equ	0xFE0
+  1748                           indf2	equ	0xFDF
+  1749                           postinc2	equ	0xFDE
+  1750                           postdec2	equ	0xFDD
+  1751                           preinc2	equ	0xFDC
+  1752                           plusw2	equ	0xFDB
+  1753                           fsr2h	equ	0xFDA
+  1754                           fsr2l	equ	0xFD9
+  1755                           status	equ	0xFD8
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         2
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95     26      28
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    _main->___awdiv
+    _get_Temp->_read_byte
+    _write_byte->_I2C_wait
+    _stop_bit->_I2C_wait
+    _start_bit->_I2C_wait
+    _read_byte->_I2C_wait
+    ___awdiv->___wmul
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                12    12      0    2725
+                                             14 COMRAM    12    12      0
+                         _Initialize
+                            ___awdiv
+                            ___awmod
+                             ___wmul
+                        _encode_Temp
+                           _get_Temp
+                         _shift_Temp
+ ---------------------------------------------------------------------------------
+ (1) _shift_Temp                                           7     3      4     700
+                                              0 COMRAM     7     3      4
+ ---------------------------------------------------------------------------------
+ (1) _get_Temp                                             0     0      0     273
+                          _read_byte
+                          _start_bit
+                           _stop_bit
+                         _write_byte
+ ---------------------------------------------------------------------------------
+ (2) _write_byte                                           2     0      2     250
+                                              1 COMRAM     2     0      2
+                           _I2C_wait
+ ---------------------------------------------------------------------------------
+ (2) _stop_bit                                             0     0      0       0
+                           _I2C_wait
+ ---------------------------------------------------------------------------------
+ (2) _start_bit                                            0     0      0       0
+                           _I2C_wait
+ ---------------------------------------------------------------------------------
+ (2) _read_byte                                            4     2      2      23
+                                              1 COMRAM     4     2      2
+                           _I2C_wait
+ ---------------------------------------------------------------------------------
+ (3) _I2C_wait                                             1     1      0       0
+                                              0 COMRAM     1     1      0
+ ---------------------------------------------------------------------------------
+ (1) _encode_Temp                                          5     3      2     206
+                                              0 COMRAM     5     3      2
+ ---------------------------------------------------------------------------------
+ (1) ___wmul                                               6     2      4     311
+                                              0 COMRAM     6     2      4
+ ---------------------------------------------------------------------------------
+ (1) ___awmod                                              6     2      4     448
+                                              0 COMRAM     6     2      4
+ ---------------------------------------------------------------------------------
+ (1) ___awdiv                                              8     4      4     604
+                                              6 COMRAM     8     4      4
+                             ___wmul (ARG)
+ ---------------------------------------------------------------------------------
+ (1) _Initialize                                           1     1      0       0
+                                              0 COMRAM     1     1      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 3
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _Initialize
+   ___awdiv
+     ___wmul (ARG)
+   ___awmod
+   ___wmul
+   _encode_Temp
+   _get_Temp
+     _read_byte
+       _I2C_wait
+     _start_bit
+       _I2C_wait
+     _stop_bit
+       _I2C_wait
+     _write_byte
+       _I2C_wait
+   _shift_Temp
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BIGRAM             2FF      0       0      10        0.0%
+EEDATA             100      0       0       0        0.0%
+BITBANK2           100      0       0       6        0.0%
+BANK2              100      0       0       7        0.0%
+BITBANK1           100      0       0       9        0.0%
+BANK1              100      0       0       5        0.0%
+BITBANK0            A0      0       0       3        0.0%
+BANK0               A0      0       0       4        0.0%
+BITCOMRAM           5F      0       0       0        0.0%
+COMRAM              5F     1A      1C       1       29.5%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+STACK                0      0       0       2        0.0%
+NULL                 0      0       0       0        0.0%
+ABS                  0      0      1C       8        0.0%
+DATA                 0      0      1C      11        0.0%
+CODE                 0      0       0       0        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.05 build -831301201 
+Symbol Table                                                                                   Mon May 18 01:33:31 2020
+
+           ___awdiv@sign 000C             encode_Temp@x 0001      ___wmul@multiplicand 0003  
+           __CFG_CP0$OFF 000000             __CFG_CP1$OFF 000000             __CFG_CPB$OFF 000000  
+                    u315 3EC6                      u325 3EF0                      u335 3F1A  
+                    u440 3B3C                      _PEN 007E2A                      u345 3F44  
+                    u265 3D64             __CFG_CPD$OFF 000000                      u507 3FF2  
+                    u275 3D90                      u380 3C2A                      u517 3AB6  
+                    u285 3DBC                      u295 3DE8                      _SEN 007E28  
+                    u477 3C72                      u487 3D3E                      u497 3EA0  
+           __CFG_BORV$30 000000             ___awmod@sign 0006                      wreg 000FE8  
+           __CFG_LVP$OFF 000000                     l1210 3C26                     l1202 3C08  
+                   l1220 3C46                     l1142 3EAC                     l1208 3C1E  
+                   l1224 3C50                     l1240 3B16                     l1080 3B84  
+                   l1072 3B74                     l1250 3B38                     l1082 3B88  
+                   l1074 3B78                     l1228 3C5E                     l1260 3B5A  
+                   l1244 3B22                     l1084 3B8C                     l1076 3B7C  
+                   l1092 3B9A                     l1086 3B90                     l1078 3B80  
+                   l1094 3BE0                     l1264 3B68                     l1256 3B50  
+                   l1248 3B30                     l1088 3B94                     l1272 3C84  
+                   l1196 3BF8                     _RCEN 007E2B            __CFG_BBSIZ$ON 000000  
+                   _main 3C68                     _temp 0019                     prodh 000FF4  
+                   prodl 000FF3         __end_of_I2C_wait 3A44                     start 0000  
+          __CFG_IESO$OFF 000000            __CFG_FOSC$IRC 000000            __CFG_MCLRE$ON 000000  
+           ___param_bank 000000                    ?_main 0001                    _ACKEN 007E2C  
+                  _ACKDT 007E2D          __end_of___awdiv 3C68          __end_of___awmod 3B72  
+        ___awdiv@divisor 0009          ___awdiv@counter 000B            __CFG_WRT0$OFF 000000  
+          __CFG_WRT1$OFF 000000           __CFG_EBTR0$OFF 000000           __CFG_FCMEN$OFF 000000  
+         __CFG_EBTR1$OFF 000000            __CFG_WRTB$OFF 000000            __CFG_WRTC$OFF 000000  
+          __CFG_WRTD$OFF 000000           __CFG_EBTRB$OFF 000000                    status 000FD8  
+        __initialization 3A24             __end_of_main 3D4C           __CFG_PCLKEN$ON 000000  
+             _Initialize 3A8C                   ??_main 000F            __activetblptr 000002  
+         __CFG_PLLEN$OFF 000000         ___awdiv@dividend 0007           __CFG_WDTEN$OFF 000000  
+                 _OSCCON 000FD3                   _SSPADD 000FC8                   _SSPBUF 000FC9  
+   __size_of_encode_Temp 0072           __CFG_PWRTEN$ON 000000           __CFG_XINST$OFF 000000  
+       __end_of_get_Temp 3B02                   ___wmul 3A66                ??___awdiv 000B  
+         __CFG_STVREN$ON 000000                ??___awmod 0005         ___awdiv@quotient 000D  
+        ___awmod@divisor 0003          ___awmod@counter 0005                ?_I2C_wait 0001  
+                 tblptru 000FF8          __CFG_HFOFST$OFF 000000         __end_of_stop_bit 3A1A  
+             __accesstop 0060  __end_of__initialization 3A28            ___rparam_used 000001  
+         __pcstackCOMRAM 0001              ?_Initialize 0001               ??_I2C_wait 0001  
+     __size_of_read_byte 0022                  ?___wmul 0001           shift_Temp@SIPO 0003  
+              ?_get_Temp 0001                  _SSPCON1 000FC6                  _SSPCON2 000FC5  
+        __CFG_USBDIV$OFF 000000       __size_of_start_bit 0008                  _SSPSTAT 000FC7  
+    __size_of_Initialize 0038                  __Hparam 0000                  __Lparam 0000  
+       shift_Temp@number 0001                  ___awdiv 3BE4                  ___awmod 3B02  
+        __size_of___wmul 0026                  __pcinit 3A24                ?_stop_bit 0001  
+                __ramtop 0300                  __ptext0 3C68                  __ptext1 3D4C  
+                __ptext2 3AC4                  __ptext3 3A1A                  __ptext4 3A12  
+                __ptext5 3A0A                  __ptext6 3A44                  __ptext7 3A32  
+                __ptext8 3B72                  __ptext9 3A66         ___awmod@dividend 0001  
+      __end_of_read_byte 3A66               ??_get_Temp 0006     end_of_initialization 3A28  
+          __Lmediumconst 0000               _shift_Temp 3D4C        __end_of_start_bit 3A12  
+             ??_stop_bit 0002                _TRISCbits 000F94        __size_of_I2C_wait 0012  
+          ??_encode_Temp 0003               main@temp_f 0017             ??_Initialize 0001  
+         __end_of___wmul 3A8C               _write_byte 3A1A      start_initialization 3A24  
+     __end_of_Initialize 3AC4              ?_shift_Temp 0001      __end_of_encode_Temp 3BE4  
+               ??___wmul 0005               read_byte@x 0004              __pbssCOMRAM 0019  
+      __size_of_get_Temp 003E                 ?___awdiv 0007                 ?___awmod 0001  
+            ?_write_byte 0002        __size_of_stop_bit 0008                 _I2C_wait 3A32  
+    __size_of_shift_Temp 02B4                _read_byte 3A44           ___wmul@product 0005  
+            _encode_Temp 3B72                 _LATCbits 000F8B         __CFG_WDTPS$32768 000000  
+      ___wmul@multiplier 0001                _start_bit 3A0A              write_byte@x 0002  
+             ?_read_byte 0002      __size_of_write_byte 000A                 __Hrparam 0000  
+               __Lrparam 0000       __CFG_BOREN$SBORDIS 000000         __size_of___awdiv 0084  
+       __size_of___awmod 0070               ?_start_bit 0001      encode_Temp@sequence 0005  
+               __ptext10 3B02                 __ptext11 3BE4                 __ptext12 3A8C  
+               _get_Temp 3AC4            __size_of_main 00E4             ??_shift_Temp 0005  
+               main@BCD1 0015                 main@BCD2 0016                 main@ones 0013  
+               main@tens 0011                 _stop_bit 3A12       __end_of_shift_Temp 4000  
+            ??_read_byte 0004     __CFG_CPUDIV$NOCLKDIV 000000             ??_write_byte 0004  
+            ??_start_bit 0002             ?_encode_Temp 0001       __end_of_write_byte 3A24  
